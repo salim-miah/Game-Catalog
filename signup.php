@@ -1,10 +1,21 @@
 <?php
 
-    
-    if ($_SERVER[REQUEST_METHOD]==POST)
-    {
+    include("classes/connect.php");
+    include("classes/signup.php");
 
-    }
+    if($_SERVER['REQUEST_METHOD']=="POST")
+    {
+        $signup = new Signup();
+        $result=$signup->evaluate($_POST);
+        if ($result!="")
+        {   
+            echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
+            echo "The following errors occured<br><br>";
+            echo $result;
+            echo "</div>";
+        }
+
+    }   
 
 ?>
 

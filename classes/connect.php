@@ -46,7 +46,7 @@ class Database
     }
 }
 
-$DB = new Database();
+
 
 
     
