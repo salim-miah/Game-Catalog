@@ -6,11 +6,17 @@
     <title>Game Vault | Login up Page</title>
 </head>
 <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
     #webpage {
-        background-color: #f2f2f2;
+        background-image: url(9AC890F8-C6BB-436F-81B1-F713D2B11D14.png);
+        background-repeat: no-repeat;
+        background-size: cover;
     }
     #login_section {
-        background-color: white;
+        background-color: rgba(255, 255, 255, 0.579);
         margin: auto;
         float: right;
         width: 350px;
@@ -18,7 +24,7 @@
         box-shadow:  0px 5px 10px 0px rgba(0, 0, 0, 0.5);
         border-radius: 7px;
         margin-top: 130px;
-        margin-right: 80px;
+        margin-right: 5vw;
         float: right;
     }
     #input1 {
@@ -45,17 +51,17 @@
         height:40px;
         border-radius: 4px;
         margin-left: 40px;
-        border: none;
-        background-color: #1a75ff;
+        border: 2px solid white;
+        background-color: rgba(255, 255, 255, 0);
         padding: 5px;
         font-family: Klavika;
         text-align: center;
-        color: white;
+        color: #503C3C;
         font-weight: bold;
         font-size: 20px;
     }
     #Login:hover {
-        background-color: #4dff4d;
+        background-color: rgba(255, 255, 255, 0.705);
     }
 
     .column {
@@ -71,7 +77,7 @@
 <body id="webpage">
     <div>
         <div id="login_section" class="column">
-            <div style="color: black; font-family: Klavika; text-align: center;font-size: 30px; font-weight: bolder;">Login In Here</div>
+            <div style="color: #481E14; font-family: Klavika; text-align: center;font-size: 30px; font-weight: bolder;">Login In Here</div>
             <div ><input type="text" placeholder="Email" id="input1"></div>
             <br>
             <div><input type="password" placeholder="Password" id="input2"></div>
@@ -79,10 +85,8 @@
             <div><input type="submit" value="Login" id="Login"></div>
             <br>
             <div id="forgotsignup">
-                <a href="">Forgot password?</a>
                 <br>
-                <br>
-                Don't have an account? &nbsp<a href="signup.php">Create an account</a>
+                Don't have an account? &nbsp<a href="signup.php" style="color: #481E14;">Create an account</a>
             </div>
         </div>    
     </div>    
