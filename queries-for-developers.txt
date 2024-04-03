@@ -1,5 +1,5 @@
 create table developers (
-    developer_id int primary key,
+    developer_id int,
     developer_name varchar(100),
     headquarters varchar(100),
     primary key(developer_name)
