@@ -1,5 +1,5 @@
 create table developers (
-    developer_id int primary key,
+    developer_id int,
     developer_name varchar(100),
     headquarters varchar(100),
     primary key(developer_name)
@@ -46,3 +46,5 @@ insert into developers values
 (38, 'Valve Corporation', 'Bellevue, Washington, United States'),
 (39, 'Visual Concepts Entertainment, Inc.', 'Novato, California, United States'),
 (40, 'Yuke''s Co. Ltd.', 'Osaka, Japan');
+
+Haha
