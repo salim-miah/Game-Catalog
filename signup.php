@@ -14,7 +14,12 @@
             echo $result;
             echo "</div>";
         }
-
+        else
+        {
+            //To redirect to login page
+            header=("Location: login.html"); 
+            die;
+        }
     }   
 
 ?>
