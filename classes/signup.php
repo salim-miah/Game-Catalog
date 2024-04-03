@@ -12,6 +12,31 @@ class Signup
             {
                 $this->error.= $key . " is empty!<br>";
             }
+            if($key=='email')
+            {
+                if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$value))
+                {
+                    $this->error.="Invalid email address!<br>";
+                }
+            }
+            if($key=='firstname')
+            {
+                if (is_numeric($value))
+                { 
+                    $this->error.="First name can't be a number<br>";
+                }
+            }
+            if($key=='lastname')
+            {
+                if (is_numeric($value))
+                { 
+                    $this->error.="Last name can't be a number<br>";
+                }
+            }   
+        }
+        if ($data['password1']!=$data['password2'])
+        {
+            $this->error.="The passwords don't match";
         }
         if ($this->error=="")
         {
