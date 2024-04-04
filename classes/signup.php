@@ -48,17 +48,29 @@ class Signup
         }
     }
 
-    public function create_user($data)
+    private function create_user($data)
     {
+        $userid=$this->create_userid();
         $firstname=$data['firstname'];
         $lastname=$data['lastname'];
         $encrypted_pass=md5($data['password1']);
         $password=$encrypted_pass;
         $email=$data['email'];
         $dob=$data['dob'];
-        $query="insert into user (firstname,lastname,password,email,dob) values ('$firstname','$lastname','$password','$email','$dob')";
+        $query="insert into user (user_id,firstname,lastname,password,email,dob) values ('$userid','$firstname','$lastname','$password','$email','$dob')";
         $DB= new Database();
         $DB->save($query);
+    }
+
+    private function create_userid()
+    {
+        $length=rand(4,19);
+        $userid="";
+        for ($i=0 ; $i<$length; $i++)
+        {
+            $userid.=rand(0,9);
+        }
+        return $userid;
     }
 }
 
