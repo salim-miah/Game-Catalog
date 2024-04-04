@@ -54,8 +54,8 @@ class Signup
         $firstname=$data['firstname'];
         $lastname=$data['lastname'];
         $encrypted_pass=md5($data['password1']);
-        $password=$encrypted_pass;
-        $email=$data['email'];
+        $password=addslashes($encrypted_pass);
+        $email=addslashes($data['email']);
         $dob=$data['dob'];
         $query="insert into user (user_id,firstname,lastname,password,email,dob) values ('$userid','$firstname','$lastname','$password','$email','$dob')";
         $DB= new Database();
