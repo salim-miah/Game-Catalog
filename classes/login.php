@@ -5,9 +5,9 @@ class Login
     private $error = "";
     public function evaluate($data)
     {
-        $encrypted_pass=md5($data['password']);
+        $encrypted_pass=md5(addslashes($data['password']));
         $password=$encrypted_pass;
-        $email=$data['email'];
+        $email=addslashes($data['email']);
         $query="select * from user where email = '$email' limit 1";
         $DB= new Database();
         $result = $DB->read($query);
