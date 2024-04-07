@@ -3,6 +3,12 @@
     include("classes/connect.php");
     include("classes/signup.php");
 
+    $firstname="";
+    $lastname="";
+    $dob="";
+    $email="";
+
+
     if($_SERVER['REQUEST_METHOD']=="POST")
     {
         $signup = new Signup();
@@ -13,11 +19,15 @@
             echo "The following errors occured<br><br>";
             echo $result;
             echo "</div>";
+            $firstname.=$_POST['firstname'];
+            $lastname.=$_POST['lastname'];
+            $dob.=$_POST['dob'];
+            $email.=$_POST['email'];
         }
         else
         {
             //To redirect to login page
-            header("Location: login.html"); 
+            header("Location: login.php"); 
             die;
         }
     }   
@@ -87,14 +97,14 @@
             <div style="color: #481E14; font-family: Klavika; text-align: center;font-size: 30px; font-weight: bolder; margin-bottom: 30px;">Sign Up Here</div>
             <form method="post">
 
-                <div><input type="text" placeholder="First Name" id="inputs" name="firstname"></div>
+                <div><input type="text" placeholder="First Name" id="inputs" name="firstname" value="<?php echo $firstname; ?>"></div>
                 <br>
-                <div><input type="text" placeholder="Last Name" id="inputs" name="lastname"></div>
+                <div><input type="text" placeholder="Last Name" id="inputs" name="lastname" value="<?php echo $lastname; ?>"></div>
                 <br>
                 <span style="margin-left: 40px; font-size: 15px; color: #481E14;">Date of Birth</span>
-                <div><input type="date" id="inputs" name="dob"></div>
+                <div><input type="date" id="inputs" name="dob" value="<?php echo $dob; ?>"></div>
                 <br>
-                <div ><input type="text" placeholder="Email" id="inputs" name="email"></div>
+                <div ><input type="text" placeholder="Email" id="inputs" name="email" value="<?php echo $email; ?>"></div>
                 <br>
                 <div><input type="password" placeholder="Password" id="inputs" name="password1"></div>
                 <br>
