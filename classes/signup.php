@@ -53,7 +53,7 @@ class Signup
         $userid=$this->create_userid();
         $firstname=$data['firstname'];
         $lastname=$data['lastname'];
-        $encrypted_pass=md5(addslashes($data['password1']));
+        $encrypted_pass=$data['password1'];
         $password=$encrypted_pass;
         $email=$data['email'];
         $dob=$data['dob'];

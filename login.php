@@ -12,22 +12,22 @@ session_start();
         $login = new Login();
         $result=$login->evaluate($_POST);
         print_r($result);
-        // if ($result!="")
-        // {   
-        //     echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
-        //     echo "The following errors occured<br><br>";
-        //     echo $result;
-        //     echo "</div>";
-        // }
-        // else
-        // {
-        //     //To redirect to profile page
-        //     header("Location: profile.html"); 
-        //     die;
-        // }
+        if ($result!="")
+        {   
+            echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
+            echo "The following errors occured<br><br>";
+            echo $result;
+            echo "</div>";
+        }
+        else
+        {
+            //To redirect to profile page
+            header("Location: homepage.php"); 
+            die;
+        }
 
-        // $email = $_POST['email'];
-        // $password = $_POST['password'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
     }
 
 

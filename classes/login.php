@@ -1,11 +1,13 @@
 <?php
 
+
+
 class Login
 {
     private $error = "";
     public function evaluate($data)
     {
-        $encrypted_pass=md5(addslashes($data['password']));
+        $encrypted_pass=addslashes($data['password']);
         $password=$encrypted_pass;
         $email=addslashes($data['email']);
         $query="select * from user where email = '$email' limit 1";
@@ -18,18 +20,19 @@ class Login
             if($password == $row['password'])
             {
                 //create a session data
-                $_SESSION['userid'] = $row['userid'];
+                session_start();
+                $_SESSION['userid'] = $row['user_id'];
             }else 
             {
-                $error .= "Wrong Password!<br>";
+                $this->error .= "Wrong Password!<br>";
             }
 
         }else 
         {
-            $error .= "No such email was found<br>";
+            $this->error .= "No such email was found<br>";
         }
         
-        return False;
+        return $this->error;
         
     }
 }
