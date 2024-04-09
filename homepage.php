@@ -1,6 +1,33 @@
 <?php
     
+    session_start();
+    //print_r($_SESSION);
+    include("classes/connect.php");
+    include("classes/login.php");
 
+    //Check if user is logged in
+    if(isset($_SESSION['gamelist_userid']) & is_numeric( $_SESSION['gamelist_userid'] ))
+    {
+        $id = $_SESSION['gamelist_userid'];
+        $login = new Login();
+        $result = $login->check_login($id);
+
+        if($result == true)
+        {
+            //Retrive user data
+            echo "Everything is fine";
+        }
+        else
+        {
+            header("Location: login.php");
+            die;
+        }
+    }
+    else
+    {
+        header("Location: login.php");
+        die;
+    } 
 ?>
 
 
