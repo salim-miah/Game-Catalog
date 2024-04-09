@@ -1,5 +1,7 @@
 <?php
+
 session_start();
+    
     include("classes/connect.php");
     include("classes/login.php");
 
@@ -21,7 +23,7 @@ session_start();
         }
         else
         {
-            //To redirect to profile page
+            //To redirect to homepage
             header("Location: homepage.php"); 
             die;
         }

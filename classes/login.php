@@ -1,7 +1,6 @@
 <?php
 
 
-
 class Login
 {
     private $error = "";
@@ -21,7 +20,7 @@ class Login
             {
                 //create a session data
                 session_start();
-                $_SESSION['userid'] = $row['user_id'];
+                $_SESSION['gamelist_userid'] = $row['user_id'];
             }else 
             {
                 $this->error .= "Wrong Password!<br>";
@@ -34,6 +33,19 @@ class Login
         
         return $this->error;
         
+    }
+
+    public function check_login($id)
+    {
+        $query="select user_id from user where user_id = $id limit 1";
+        $DB= new Database();
+        $result = $DB->read($query);
+        if($result)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
 
