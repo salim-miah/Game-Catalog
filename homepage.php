@@ -50,6 +50,44 @@
             background-color: #92695d;
             color: #ffffff;
         }
+        .game-bar {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .serial-number {
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .game-image {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+        }
+
+        .game-info {
+            flex-grow: 1;
+        }
+
+        .game-name {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .game-details {
+            color: blue;
+            text-decoration: none;
+        }
+
+        .game-details:hover {
+            text-decoration: underline;
+        }
     </style>
 
     <body style="font-family: georgia; background-color: #FFE4D7;">
@@ -68,6 +106,29 @@
             
         <div style="width: 900px; margin: auto; background-color: black; height: 350px;">
             <img src="cover.jpg" style="width:900px; height: 350px;">
+            <br>
+            <?php
+                include("classes/games.php");
+                $games= new Games();
+                $game_data=$games->extract_games();
+                $serial_number=1;
+                foreach ($game_data as $key=>$value)
+                {
+                    echo '<div class="game-bar">';
+                    echo '<div class="serial-number">';
+                    echo $serial_number;
+                    echo '</div>';
+                    echo '<img class="game-image" src="gamepic.jpg" alt="Game 1">';
+                    echo '<div class="game-info">';
+                    echo '<div class="game-name">';
+                    echo $value['name'];
+                    echo '</div>';
+                    echo '<a href="#" class="game-details">View Details</a>';
+                    echo '</div>';
+                    echo '</div>';
+                    $serial_number++;
+                }
+            ?>
         </div>
         
 
