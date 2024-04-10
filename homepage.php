@@ -40,10 +40,36 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Homepage | GameList</title>
     </head>
 
     <style type="text/css">
+        
+        /* Styles for the navigation bar */
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+        .active {
+            background-color: #555;
+        }
 
         #top_bar{
             height: 50px;
@@ -107,6 +133,13 @@
         <div style="width: 900px; margin: auto; background-color: black; height: 350px;">
             <img src="cover.jpg" style="width:900px; height: 350px;">
             <br>
+            <nav>
+                <a href="#" class="active">All Games</a>
+                <a href="#">Sort by: Genre</a>
+                <a href="#">Sort by: Latest</a>
+                <a href="#">Sort by: Oldest</a>
+                <a href="#">Sort by: Rating</a>
+            </nav>
             <?php
                 include("classes/games.php");
                 $games= new Games();
