@@ -40,7 +40,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Homepage | GameChronicles</title>
+        <title>Homepage | GameList</title>
     </head>
 
     <style type="text/css">
@@ -93,7 +93,7 @@
     <body style="font-family: georgia; background-color: #FFE4D7;">
         <div id="top_bar">
             <div style="float: left;font-size: 30px; margin: 8px;">
-                GameChronicles
+                GameList
             </div>
             <div style="float: right;font-size: 20px;margin: 10px;">
                 <div>Logged in as, <?php echo $name; ?></div>
