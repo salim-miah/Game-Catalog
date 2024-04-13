@@ -73,7 +73,7 @@
 
         #top_bar{
             height: 50px;
-            background-color: #92695d;
+            background: linear-gradient(to right, #000000, #52525200); 
             color: #ffffff;
         }
         .game-bar {
@@ -116,7 +116,7 @@
         }
     </style>
 
-    <body style="font-family: georgia; background-color: #FFE4D7;">
+<body style="font-family: georgia; background: linear-gradient(to right, #021024, #1e487f);">
         <div id="top_bar">
             <div style="float: left;font-size: 30px; margin: 8px;">
                 GameList
@@ -134,7 +134,7 @@
         </div>
             
         <div style="width: 900px; margin: auto; background-color: black; height: 350px;">
-            <img src="cover.jpg" style="width:900px; height: 350px;">
+        <img src="coverpic.jpeg" style="width:900px; height: 350px;">
             <br>
             <nav>
                 <a href="homepage.php">All Games</a>
