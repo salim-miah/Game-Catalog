@@ -49,13 +49,13 @@
 
     #top_bar{
         height: 50px;
-        background: linear-gradient(to right, #021024, #1e487f); /* Gradient for the top bar */
+        background: linear-gradient(to right, #000000, #52525200);  
         color: #ffffff;
     }
 
     #second_bar{
         height: 50px;
-        background: linear-gradient(to right, #052659, #367fa9); /* Gradient for the second bar */
+        background: linear-gradient(to right, #052659, #367fa9);
         color: #ffffff;
         font-size: 30px;
         margin-top: 10px; 
