@@ -1,10 +1,10 @@
 <?php
     
     session_start();
-    //print_r($_SESSION);
     include("classes/connect.php");
     include("classes/login.php");
     include("classes/user.php");
+    include("classes/view_details.php");
 
     $name="";
 
@@ -34,6 +34,19 @@
         header("Location: login.php");
         die;
     } 
+
+    //To check if view details button is clicked
+    if($_SERVER['REQUEST_METHOD']=="POST")
+    {
+        $game_id="";
+        foreach ($_POST as $key=>$value)
+        {
+            $game_id=$key;
+        }
+
+        $viewdetails= new ViewDetails();
+        $viewdetails->create_session($game_id);
+    }
 ?>
 
 
@@ -159,7 +172,11 @@
                     echo '<div class="game-name">';
                     echo $value['name'];
                     echo '</div>';
-                    echo '<a href="game_detail.php" class="game-details">View Details</a>';
+                    echo '<form method="post">';
+                    echo '<input type="submit" value="View Details" name=';
+                    echo $value['game_id'];
+                    echo '>';
+                    echo '</form>';
                     echo '</div>';
                     echo '</div>';
                     $serial_number++;
