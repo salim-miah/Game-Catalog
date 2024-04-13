@@ -125,6 +125,9 @@
                 <div>Logged in as, <?php echo $name; ?></div>
                 <!-- <a href="profile.html" target="_blank" style="color: #ffffff">Logged in as, Pranto</a> -->
             </div>
+            <a href="profile.html" style="float: right; margin: 12px; color: #ffffff">
+                <span>Profile</span>
+            </a>
             <a href="logout.php" style="float: right; margin: 12px; color: #ffffff">
                 <span>Logout</span>
             </a>
