@@ -62,7 +62,7 @@
         
         /* Styles for the navigation bar */
         nav {
-            background-color: #333;
+            background: linear-gradient(to right, #000000, #52525200);
             color: #fff;
             padding: 10px;
             display: flex;
@@ -77,24 +77,23 @@
         }
 
         nav a:hover {
-            background-color: #555;
+            background-color: #7da0ca7d;
         }
 
         .active {
-            background-color: #555;
+            background-color: #7da0ca7d;
         }
 
         #top_bar{
             height: 50px;
-            background: linear-gradient(to right, #021024, #1e487f); 
+            background: linear-gradient(to right, #000000, #52525200); 
             color: #ffffff;
         }
         .game-bar {
             display: flex;
             align-items: center;
             padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border-bottom: 1px solid #7da0ca7d;
             margin-bottom: 10px;
         }
 
@@ -102,6 +101,7 @@
             font-size: 18px;
             font-weight: bold;
             margin-right: 10px;
+            color: #fff;
         }
 
         .game-image {
@@ -117,6 +117,7 @@
         .game-name {
             font-size: 18px;
             margin-bottom: 5px;
+            color: #fff;
         }
 
         .game-details {
@@ -129,7 +130,7 @@
         }
     </style>
 
-    <body style="font-family: georgia; background-color: #7DA0CA;">
+    <body style="font-family: georgia; background: linear-gradient(to right, #021024, #1e487f);">
         <div id="top_bar">
             <div style="float: left;font-size: 30px; margin: 8px;">
                 GameList
@@ -147,7 +148,7 @@
         </div>
             
         <div style="width: 900px; margin: auto; background-color: black; height: 350px;">
-            <img src="cover.jpeg" style="width:900px; height: 350px;">
+            <img src="coverpic.jpeg" style="width:900px; height: 350px;">
             <br>
             <nav>
                 <a href="homepage.php" class="active">All Games</a>
@@ -173,7 +174,7 @@
                     echo $value['name'];
                     echo '</div>';
                     echo '<form method="post">';
-                    echo '<input type="submit" value="View Details" name=';
+                    echo '<input type="submit" value="View Details" style="background-color: #7da0ca7d; color: #fff; padding: 5px 10px; border-radius: 5px; border: none;" name=';
                     echo $value['game_id'];
                     echo '>';
                     echo '</form>';
