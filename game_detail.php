@@ -63,7 +63,7 @@
 
     #game_info{
         width: 850px;
-        background-color: #6b95c9;
+        background: linear-gradient(to right, #052659, #367fa9);
         color: #052659;
         font-size: 25px;
         margin: auto;
@@ -81,7 +81,7 @@
 
     #details{
         width: 900px;
-        background-color: #6b95c9;
+        background: linear-gradient(to right, #052659, #367fa9);
         color: #052659;
         font-size: 25px;
         margin: auto;
@@ -91,7 +91,7 @@
     #review{
         width: 900px;
         height: 150px;
-        background-color: #6b95c9;
+        background: linear-gradient(to right, #052659, #367fa9);
         color: #052659;
         font-size: 25px;
         margin: auto;
@@ -102,7 +102,7 @@
         width: 880px;
         height: 100px;
         font-family: georgia;
-        background-color: #bdccdf;
+        background-color: #7DA0CA;
         color: #052659;
         font-size: 18px;
         margin: auto;
@@ -115,7 +115,7 @@
         height: 100px;
         font-family: georgia;
         font-size: 25px;
-        background-color: #6b95c9;
+        background: linear-gradient(to right, #052659, #367fa9);
         color: #052659;
         margin: auto;
         margin-top: 5px;
@@ -175,7 +175,7 @@
 </style>
 
 
-<body style="font-family: georgia; background-color: #7DA0CA;">
+<body style="font-family: georgia;  background: linear-gradient(to right, #052659, #367fa9);">
     <div id="top_bar">
         <div style="width: 900px; margin: auto;font-size: 30px;">
             <div style="float: left;">GameList</div> 
