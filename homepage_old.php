@@ -134,10 +134,10 @@
             <img src="cover.jpg" style="width:900px; height: 350px;">
             <br>
             <nav>
-                <a href="homepage.php" class="active">All Games</a>
+                <a href="homepage.php">All Games</a>
                 <a href="homepage_genre.php">Sort by: Genre</a>
                 <a href="homepage_latest.php">Sort by: Latest</a>
-                <a href="homepage_old.php">Sort by: Oldest</a>
+                <a href="homepage_old.php" class="active">Sort by: Oldest</a>
                 <a href="homepage_rating.php">Sort by: Rating</a>
             </nav>
             <?php
