@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game Detail | GameList</title>
+</head>
+
+<style type="text/css">
+
+    #top_bar{
+        height: 50px;
+        background: linear-gradient(to right, #021024, #1e487f); /* Gradient for the top bar */
+        color: #ffffff;
+    }
+
+    #second_bar{
+        height: 50px;
+        background: linear-gradient(to right, #052659, #367fa9); /* Gradient for the second bar */
+        color: #ffffff;
+        font-size: 30px;
+        margin-top: 10px; 
+    }
+
+    #game_info{
+        width: 850px;
+        background-color: #6b95c9;
+        color: #052659;
+        font-size: 25px;
+        margin: auto;
+        margin-top: 5px;
+        padding-left: 50px; /* Adjust the left padding to accommodate the picture */
+        display: flex;
+        align-items: center; /* Align the content vertically */
+    }
+
+    #game_image {
+        width: 80px;
+        height: 80px;
+        margin-right: 50px; /* Add margin to separate the picture from text */
+    }
+
+    #details{
+        width: 900px;
+        background-color: #6b95c9;
+        color: #052659;
+        font-size: 25px;
+        margin: auto;
+        margin-top: 5px;  
+    }
+
+    #review{
+        width: 900px;
+        height: 150px;
+        background-color: #6b95c9;
+        color: #052659;
+        font-size: 25px;
+        margin: auto;
+        margin-top: 5px;
+    }
+
+    #review_input{
+        width: 880px;
+        height: 100px;
+        font-family: georgia;
+        background-color: #bdccdf;
+        color: #052659;
+        font-size: 18px;
+        margin: auto;
+        margin-top: 5px;
+        margin-left: 6px;
+    }
+
+    #rating{
+        width: 900px;
+        height: 100px;
+        font-family: georgia;
+        font-size: 25px;
+        background-color: #6b95c9;
+        color: #052659;
+        margin: auto;
+        margin-top: 5px;
+    }
+
+    .star {
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    .star:hover,
+    .star.active {
+        color: gold;
+    }
+</style>
+
+
+<body style="font-family: georgia; background-color: #7DA0CA;">
+    <div id="top_bar">
+        <div style="width: 900px; margin: auto;font-size: 30px;">
+            GameList
+            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
+           Logged in as: Pranto
+        </div>
+    </div>
+    <div id="second_bar" style="width: 900px; margin: auto;">
+        Game Detail
+    </div>
+    <div id="game_info">
+        <img id="game_image" src="game_picture.jpg" alt="Game Picture"> 
+        <div>
+            Game ID: 42 <br>
+            Game Name: Cyberpunk 2077 <br>
+            Genre: Role-playing <br>
+            Release_date: 2020-12-10 <br>
+            Developer: CD Projekt RED <br>
+            
+        </div>
+    </div>
+
+    <div id="details">
+        <div>
+            <span style="text-decoration: underline; padding-bottom: 5px;">Sypnosis</span><br>
+            Cyberpunk 2077 is an open-world, action-adventure RPG set in Night City, a megalopolis obsessed with power, glamour, and body modification. Play as V, a cyberpunk mercenary, and take on the most powerful forces of the city in a fight for glory and survival.
+        </div>
+    </div>
+    
+    <div id="review">
+        <div>
+            <span style="text-decoration: underline; padding-bottom: 5px;">Upload your review</span><br>
+            <textarea id="review_input" rows="4" cols="50" maxlength="500"></textarea> 
+        </div>
+    </div>
+    
+    <div id="rating">
+        <div>
+            <span style="text-decoration: underline; padding-bottom: 5px;">Rate the game</span><br>
+            <span class="star" data-value="1">&#9733;</span>
+            <span class="star" data-value="2">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="5">&#9733;</span>
+
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const stars = document.querySelectorAll('.star');
+
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            const value = parseInt(this.getAttribute('data-value'));
+            resetStars();
+            for (let i = 0; i < value; i++) {
+                stars[i].classList.add('active');
+            }
+        });
+    });
+
+    function resetStars() {
+        stars.forEach(star => {
+            star.classList.remove('active');
+        });
+    }
+});
+</script>
+</body>
+</html>
+
