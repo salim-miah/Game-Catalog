@@ -188,12 +188,27 @@
     <div id="game_info">
         <img id="game_image" src="game_picture.jpg" alt="Game Picture"> 
         <div>
-            Game ID: 42 <br>
-            Game Name: Cyberpunk 2077 <br>
-            Genre: Role-playing <br>
-            Release_date: 2020-12-10 <br>
-            Developer: CD Projekt RED <br>
-            
+            <?php
+
+                include("classes/games.php");
+                $details = new Games();
+                $game_id=$_SESSION['game_id'];
+                $result=$details->view_game_details($game_id);
+                $game_details=$result[0];
+                echo "Game ID: ";
+                echo $game_details['game_id'];
+                echo " <br>";
+                echo "Game Name: ";
+                echo $game_details['name'];
+                echo " <br>";
+                echo "Release_date: ";
+                echo $game_details['release_date'];
+                echo " <br>";
+                echo "Developer: ";
+                echo $game_details['developer'];
+                echo " <br>";
+
+            ?>
         </div>
     </div>
 
