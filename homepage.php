@@ -156,7 +156,7 @@
                     echo '<div class="game-name">';
                     echo $value['name'];
                     echo '</div>';
-                    echo '<a href="gamedetails.php" class="game-details">View Details</a>';
+                    echo '<a href="game_detail.php" class="game-details">View Details</a>';
                     echo '</div>';
                     echo '</div>';
                     $serial_number++;
