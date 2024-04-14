@@ -5,6 +5,7 @@
     include("classes/connect.php");
     include("classes/login.php");
     include("classes/user.php");
+    include("classes/view_details.php");
 
     $name="";
 
@@ -34,6 +35,18 @@
         header("Location: login.php");
         die;
     } 
+    //To check if view details button is clicked
+    if($_SERVER['REQUEST_METHOD']=="POST")
+    {
+        $game_id="";
+        foreach ($_POST as $key=>$value)
+        {
+            $game_id=$key;
+        }
+
+        $viewdetails= new ViewDetails();
+        $viewdetails->create_session($game_id);
+    }
 ?>
 
 
@@ -49,7 +62,7 @@
         
         /* Styles for the navigation bar */
         nav {
-            background-color: #333;
+            background: linear-gradient(to right, #000000, #52525200);
             color: #fff;
             padding: 10px;
             display: flex;
@@ -64,11 +77,11 @@
         }
 
         nav a:hover {
-            background-color: #555;
+            background-color: #7da0ca7d;
         }
 
         .active {
-            background-color: #555;
+            background-color: #7da0ca7d;
         }
 
         #top_bar{
@@ -80,8 +93,7 @@
             display: flex;
             align-items: center;
             padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border-bottom: 1px solid #7da0ca7d;
             margin-bottom: 10px;
         }
 
@@ -89,6 +101,7 @@
             font-size: 18px;
             font-weight: bold;
             margin-right: 10px;
+            color: #fff;
         }
 
         .game-image {
@@ -104,6 +117,7 @@
         .game-name {
             font-size: 18px;
             margin-bottom: 5px;
+            color: #fff;
         }
 
         .game-details {
@@ -125,10 +139,10 @@
                 <div>Logged in as, <?php echo $name; ?></div>
                 <!-- <a href="profile.html" target="_blank" style="color: #ffffff">Logged in as, Pranto</a> -->
             </div>
-            <a href="profile.html" style="float: right; margin: 12px; color: #ffffff">
+            <a href="profile.html" style="float: right; margin: 12px; text-decoration: none; color: #fff; padding: 3px 10px; border-radius: 5px; background-color: #7da0ca7d;">
                 <span>Profile</span>
             </a>
-            <a href="logout.php" style="float: right; margin: 12px; color: #ffffff">
+            <a href="logout.php" style="float: right; margin: 12px; text-decoration: none; color: #fff; padding: 3px 10px; border-radius: 5px; background-color: #7da0ca7d;">
                 <span>Logout</span>
             </a>
         </div>
@@ -159,7 +173,11 @@
                     echo '<div class="game-name">';
                     echo $value['name'];
                     echo '</div>';
-                    echo '<a href="game_detail.php" class="game-details">View Details</a>';
+                    echo '<form method="post">';
+                    echo '<input type="submit" value="View Details" style="background-color: #7da0ca7d; color: #fff; padding: 5px 10px; border-radius: 5px; border: none;" name=';
+                    echo $value['game_id'];
+                    echo '>';
+                    echo '</form>';
                     echo '</div>';
                     echo '</div>';
                     $serial_number++;
