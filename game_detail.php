@@ -121,6 +121,17 @@
         margin-top: 5px;
     }
 
+    #Add_to_list{
+        width: 900px;
+        height: 100px;
+        font-family: georgia;
+        font-size: 25px;
+        background: linear-gradient(to right, #052659, #367fa9);
+        color: #ffffff;
+        margin: auto;
+        margin-top: 5px;       
+    }
+
     *{
     margin: 0;
     padding: 0;
@@ -262,6 +273,11 @@
                 <span><input type="submit" name="submit" value="Rate" id="Submit"></span>
             </form>
 
+        </div>
+    </div>
+    <div id="Add_to_list">
+        <div>
+            <span style="text-decoration: underline; padding-bottom: 5px;">Add to your list</span><br>
         </div>
     </div>
 </body>
