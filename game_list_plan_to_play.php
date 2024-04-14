@@ -42,7 +42,6 @@
 ?>
 
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,21 +67,34 @@
     #list_image{
         width: 900px; 
         margin: auto; 
-        background: linear-gradient(to right, #052659, #367fa9);
-        height: 480px;
+        background: linear-gradient(to right, #052659, #367fa9);  
+        height: 450px;
         margin-top: 5px;
         font-size: 20px;
         
     }
 
-    #list_image a {
-        text-decoration: none; 
-        color: #ffffff; 
+    nav {
+            background: linear-gradient(to right, #000000, #52525200);
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
     }
 
-    #list_image a[href="game_list_plan_to_play.html"] {
-    font-weight: bold; 
-    text-decoration-line: underline; 
+    nav a {
+            text-decoration: none;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+    }
+
+    nav a:hover {
+            background-color: #7da0ca7d;
+    }
+
+    .active {
+            background-color: #7da0ca7d;
     }
 
     #list_box{
@@ -97,7 +109,7 @@
     #list_title{
         width: 800px; 
         margin: auto; 
-        background: linear-gradient(to right, #052659, #367fa9);
+        background: linear-gradient(to right, #052659, #367fa9); 
         height: 50px;
         color:  #ffffff;
         font-weight: bold; 
@@ -106,6 +118,8 @@
         justify-content: center; 
         align-items: center;
     }
+
+
 
 </style>
 
@@ -124,27 +138,23 @@
     </div>
 
     <div id="list_image">
-        <div>
-            <img src="gamelist_image.jpeg" style="width:830px; height: 380px; padding-left: 35px; padding-top: 30px;">
-            <br><br>
-            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-            <a href="game_list_main.php">All Games</a>
-            &nbsp &nbsp &nbsp 
-            <a href="game_list_currently_playing.php">Currently Playing</a> 
-            &nbsp &nbsp &nbsp 
-            <a href="game_list_completed.php">Completed</a>
-            &nbsp &nbsp &nbsp 
-            <a href="game_list_dropped.php">Dropped</a> 
-            &nbsp &nbsp &nbsp 
-            <a href="game_list_plan_to_play.php">Plan to Play</a>
-
-        </div>
+        <img src="gamelist_image.jpeg" style="width:830px; height: 380px; padding-left: 35px; padding-top: 30px;">
     </div>
-
+    <br>
     <div id="list_box">
+        <div>
+            <nav>
+                <a href="game_list_main.php">All Games</a>
+                <a href="game_list_currently_playing.php">Currently Playing</a> 
+                <a href="game_list_completed.php">Completed</a>
+                <a href="game_list_dropped.php">Dropped</a>  
+                <a href="game_list_plan_to_play.php" class="active">Plan to Play</a>   
+                <a href="game_list_my_reviews.php">My Reviews</a>
+                <a href="game_list_my_ratings.php">My Ratings</a>
+            </nav>
+        </div>
         <div id="list_title">
-            Plan to Play
-
+            Plan to play
         </div>
     </div>
    
