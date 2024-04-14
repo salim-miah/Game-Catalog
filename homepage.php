@@ -178,6 +178,12 @@
                     echo $value['game_id'];
                     echo '>';
                     echo '</form>';
+                    echo '<div style="float: right; color: #fff;margin-right: 50px;">';
+                    echo 'Genre: ';
+                    echo $value['genre'];
+                    echo '<br>';
+                    echo 'Rating: ';
+                    echo '</div>';
                     echo '</div>';
                     echo '</div>';
                     $serial_number++;
