@@ -167,7 +167,9 @@
                     echo '<div class="serial-number">';
                     echo $serial_number;
                     echo '</div>';
-                    echo '<img class="game-image" src="gamepic.jpg" alt="Game 1">';
+                    echo '<img class="game-image" src="';
+                    echo $value['images']; 
+                    echo '"alt="Game 1">';
                     echo '<div class="game-info">';
                     echo '<div class="game-name">';
                     echo $value['name'];
