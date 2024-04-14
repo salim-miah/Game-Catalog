@@ -1,0 +1,11 @@
+create table game_list 
+(
+	list_id int,
+	entry_id varchar(19),
+	flag_allgames int,
+	flag_currentlyplaying int,
+	flag_completed int,
+	flag_dropped int,
+	reeason_of_dropping varchar(200),
+	primary key(list_id,entry_id)
+);

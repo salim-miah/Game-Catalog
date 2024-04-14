@@ -1,0 +1,11 @@
+create table addinggames
+(
+	game_id int,
+	list_id int,
+	entry_id varchar(19),
+	ratings int,
+	reviews varchar(2000),
+	primary key(game_id,list_id,entry_id),
+	foreign key(game_id) references games(game_id),
+	foreign key(list_id,entry_id) references game_list(list_id,entry_id)
+);
