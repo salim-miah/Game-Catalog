@@ -64,7 +64,7 @@
     #game_info{
         width: 850px;
         background: linear-gradient(to right, #052659, #367fa9);
-        color: #052659;
+        color: #ffffff;
         font-size: 25px;
         margin: auto;
         margin-top: 5px;
@@ -82,7 +82,7 @@
     #details{
         width: 900px;
         background: linear-gradient(to right, #052659, #367fa9);
-        color: #052659;
+        color: #ffffff;
         font-size: 25px;
         margin: auto;
         margin-top: 5px;  
@@ -92,7 +92,7 @@
         width: 900px;
         height: 150px;
         background: linear-gradient(to right, #052659, #367fa9);
-        color: #052659;
+        color: #ffffff;
         font-size: 25px;
         margin: auto;
         margin-top: 5px;
@@ -103,7 +103,7 @@
         height: 100px;
         font-family: georgia;
         background-color: #7DA0CA;
-        color: #052659;
+        color: #ffffff;
         font-size: 18px;
         margin: auto;
         margin-top: 5px;
@@ -116,7 +116,7 @@
         font-family: georgia;
         font-size: 25px;
         background: linear-gradient(to right, #052659, #367fa9);
-        color: #052659;
+        color: #ffffff;
         margin: auto;
         margin-top: 5px;
     }
@@ -171,6 +171,12 @@
     #Submit {
         margin: 5px;
         margin-right: 80px;
+        text-decoration: none;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #7da0ca7d;
     }
 </style>
 
@@ -185,6 +191,7 @@
     <div id="second_bar" style="width: 900px; margin: auto;">
         Game Detail
     </div>
+    <br>
     <div id="game_info">
         <img id="game_image" src="game_picture.jpg" alt="Game Picture"> 
         <div>
@@ -211,21 +218,21 @@
             ?>
         </div>
     </div>
-
+    <br>
     <div id="details">
         <div>
             <span style="text-decoration: underline; padding-bottom: 5px;">Sypnosis</span><br>
             Cyberpunk 2077 is an open-world, action-adventure RPG set in Night City, a megalopolis obsessed with power, glamour, and body modification. Play as V, a cyberpunk mercenary, and take on the most powerful forces of the city in a fight for glory and survival.
         </div>
     </div>
-    
+    <br>
     <div id="review">
         <div>
             <span style="text-decoration: underline; padding-bottom: 5px;">Upload your review</span><br>
             <textarea id="review_input" rows="4" cols="50" maxlength="500"></textarea> 
         </div>
     </div>
-    
+    <br>
     <div id="rating">
         <div>
             <span style="text-decoration: underline; padding-bottom: 5px;">Rate the game</span><br>
@@ -252,7 +259,7 @@
                     <input type="radio" id="star1" name="rate" value="1" />
                     <label for="star1" title="text">1 star</label>
                 </div>
-                <span><input type="submit" name="submit" value="Rate" id="Submit" style="width: 70px; height: 30px"></span>
+                <span><input type="submit" name="submit" value="Rate" id="Submit"></span>
             </form>
 
         </div>
