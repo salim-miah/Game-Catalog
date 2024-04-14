@@ -109,7 +109,7 @@
 
     <div id="playlist_bar">
         <div>
-            <a href="game_list_main.php" target="_blank" style="color: #ffffff;"><?php echo $firstname; ?>'s Game List</a>
+            <a href="game_list_main.php" style="color: #ffffff;"><?php echo $firstname; ?>'s Game List</a>
         </div>
     </div>
 </body>
