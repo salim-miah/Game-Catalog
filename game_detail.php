@@ -123,7 +123,6 @@
 
     #Add_to_list{
         width: 900px;
-        height: 100px;
         font-family: georgia;
         font-size: 25px;
         background: linear-gradient(to right, #052659, #367fa9);
@@ -137,48 +136,6 @@
     padding: 0;
     }
 
-    .rate {
-    float: left;
-    height: 46px;
-    padding: 0 10px;
-    }
-
-    .rate:not(:checked) > input {
-        position:absolute;
-        top:-9999px;
-    }
-
-    .rate:not(:checked) > label {
-        float:right;
-        width:1em;
-        overflow:hidden;
-        white-space:nowrap;
-        cursor:pointer;
-        font-size:30px;
-        color:#ccc;
-    }
-
-    .rate:not(:checked) > label:before {
-        content: '★ ';
-    }
-
-    .rate > input:checked ~ label {
-        color: #ffc700;    
-    }
-
-    .rate:not(:checked) > label:hover,
-    .rate:not(:checked) > label:hover ~ label {
-        color: #deb217;  
-    }
-
-    .rate > input:checked + label:hover,
-    .rate > input:checked + label:hover ~ label,
-    .rate > input:checked ~ label:hover,
-    .rate > input:checked ~ label:hover ~ label,
-    .rate > label:hover ~ input:checked ~ label {
-        color: #c59b08;
-    }
-
     #Submit {
         margin: 5px;
         margin-right: 80px;
@@ -188,6 +145,27 @@
         border-radius: 5px;
         border: none;
         background-color: #7da0ca7d;
+    }
+
+    nav {
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            margin-bottom: 20px;
+    }
+
+    nav a {
+            text-decoration: none;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #7da0ca7d;
+    }
+
+    nav a:hover {
+        background-color: #7da0cab2;  
     }
 </style>
 
@@ -225,7 +203,6 @@
                 echo "Developer: ";
                 echo $game_details['developer'];
                 echo " <br>";
-
             ?>
         </div>
     </div>
@@ -244,40 +221,15 @@
         </div>
     </div>
     <br>
-    <div id="rating">
-        <div>
-            <span style="text-decoration: underline; padding-bottom: 5px;">Rate the game</span><br>
-            <form method="post">
-                <div class="rate">
-                    <input type="radio" id="star10" name="rate" value="10" />
-                    <label for="star10" title="text">10 stars</label>
-                    <input type="radio" id="star9" name="rate" value="9" />
-                    <label for="star9" title="text">9 stars</label>
-                    <input type="radio" id="star8" name="rate" value="8" />
-                    <label for="star8" title="text">8 stars</label>
-                    <input type="radio" id="star7" name="rate" value="7" />
-                    <label for="star7" title="text">7 stars</label>
-                    <input type="radio" id="star6" name="rate" value="6" />
-                    <label for="star6" title="text">6 stars</label>
-                    <input type="radio" id="star5" name="rate" value="5" />
-                    <label for="star5" title="text">5 stars</label>
-                    <input type="radio" id="star4" name="rate" value="4" />
-                    <label for="star4" title="text">4 stars</label>
-                    <input type="radio" id="star3" name="rate" value="3" />
-                    <label for="star3" title="text">3 stars</label>
-                    <input type="radio" id="star2" name="rate" value="2" />
-                    <label for="star2" title="text">2 stars</label>
-                    <input type="radio" id="star1" name="rate" value="1" />
-                    <label for="star1" title="text">1 star</label>
-                </div>
-                <span><input type="submit" name="submit" value="Rate" id="Submit"></span>
-            </form>
-
-        </div>
-    </div>
     <div id="Add_to_list">
         <div>
             <span style="text-decoration: underline; padding-bottom: 5px;">Add to your list</span><br>
+            <nav>
+                <a href="add_to_list_plan_to_play.php">Plan to Play</a>
+                <a href="add_to_list_currently_playing.php">Currently Playing</a>
+                <a href="add_to_list_completed.php">Completed</a>
+                <a href="add_to_list_dropped.php">Dropped</a>
+            </nav>
         </div>
     </div>
 </body>
