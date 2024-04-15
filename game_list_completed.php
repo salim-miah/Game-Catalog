@@ -150,7 +150,6 @@
                 <a href="game_list_dropped.php">Dropped</a>  
                 <a href="game_list_plan_to_play.php">Plan to Play</a>   
                 <a href="game_list_my_reviews.php">My Reviews</a>
-                <a href="game_list_my_ratings.php">My Ratings</a>
             </nav>
         </div>
         <div id="list_title">
