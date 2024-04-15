@@ -5,6 +5,9 @@ create table game_list
 	flag_allgames int,
 	flag_currentlyplaying int,
 	flag_completed int,
+	flag_rating int,
+	rating decimal(3,2),
+	flag_review int(11),
 	flag_dropped int,
 	reeason_of_dropping varchar(200),
 	primary key(list_id,entry_id)
