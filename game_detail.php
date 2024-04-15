@@ -4,6 +4,7 @@
     include("classes/connect.php");
     include("classes/login.php");
     include("classes/user.php");
+    include("classes/gamelist.php");
 
     $name="";
 
@@ -33,6 +34,38 @@
         header("Location: login.php");
         die;
     } 
+
+    if($_SERVER['REQUEST_METHOD']=="POST")
+    {
+        $gl= new GameList();
+        $user_id=$_SESSION['gamelist_userid'];
+        $game_id=$_SESSION['game_id'];
+        $review=$_POST['review'];
+        $status='review';
+        $list_id=$gl->check_userlist($user_id);
+        $entry_id="";
+        if ($list_id==NULL)
+        {
+            $id=$gl->create_new_game_list($user_id,$game_id,$status);
+            $list_id=$id[0];
+            $entry_id=$id[1];
+            $gl->post_review($review,$list_id,$entry_id);
+        }
+        else
+        {
+            $result=$gl->check_addinggames($game_id);
+            if ($result!=false)
+            {
+                $entry_id=$result;
+                $gl->post_review($review,$list_id,$entry_id);
+            }
+            else //if the game is not added before
+            {
+                $entry_id=$gl->create_existing_game_list($list_id,$game_id,$status);
+                $gl->post_review($review,$list_id,$entry_id);
+            }
+        }
+    }
 ?>
 
 
@@ -90,7 +123,7 @@
 
     #review{
         width: 900px;
-        height: 150px;
+        height: 180px;
         background: linear-gradient(to right, #052659, #367fa9);
         color: #ffffff;
         font-size: 25px;
@@ -136,15 +169,19 @@
     padding: 0;
     }
 
-    #Submit {
-        margin: 5px;
-        margin-right: 80px;
-        text-decoration: none;
-        color: #fff;
-        padding: 5px 10px;
-        border-radius: 5px;
-        border: none;
-        background-color: #7da0ca7d;
+    #submit {
+        float: right; 
+        text-decoration: none; 
+        color: #fff; 
+        padding: 5px 10px; 
+        border-radius: 5px; 
+        border: none; 
+        background-color: #7da0ca7d; 
+        font-size: 18px
+    }
+
+    #submit:hover{
+        background-color: #7da0cab2; 
     }
 
     nav {
@@ -220,7 +257,11 @@
     <div id="review">
         <div>
             <span style="text-decoration: underline; padding-bottom: 5px;">Upload your review</span><br>
-            <textarea id="review_input" rows="4" cols="50" maxlength="500"></textarea> 
+            <form method="post">
+                <textarea id="review_input" rows="4" cols="50" maxlength="500" name="review"></textarea>
+                <br>
+                <input type="submit" value="Submit" name="Submit" id="submit">
+            </form>
         </div>
     </div>
     <br>
