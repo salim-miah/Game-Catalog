@@ -74,8 +74,8 @@
     }
 
     #game_image {
-        width: 80px;
-        height: 80px;
+        width: 200px;
+        height: 200px;
         margin-right: 50px; /* Add margin to separate the picture from text */
     }
 
@@ -227,15 +227,18 @@
     </div>
     <br>
     <div id="game_info">
-        <img id="game_image" src="game_picture.jpg" alt="Game Picture"> 
-        <div>
-            <?php
-
+    <?php
                 include("classes/games.php");
                 $details = new Games();
                 $game_id=$_SESSION['game_id'];
                 $result=$details->view_game_details($game_id);
                 $game_details=$result[0];
+                echo '<img id="game_image" src="';
+                echo $game_details['images']; 
+                echo '"alt="Game Picture">';
+            ?>     
+        <div>
+            <?php
                 echo "Game ID: ";
                 echo $game_details['game_id'];
                 echo " <br>";
@@ -248,7 +251,6 @@
                 echo "Developer: ";
                 echo $game_details['developer'];
                 echo " <br>";
-
             ?>
         </div>
     </div>
