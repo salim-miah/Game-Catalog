@@ -109,8 +109,10 @@
                 $row=$result[0];
                 if ($row['flag_plantoplay']==0 or $row['flag_plantoplay']==NULL)
                 {
+                    $query0="update game_list set flag_currentlyplaying=0, flag_completed=0, flag_dropped=0 where list_id='$list_id' and entry_id='$entry_id'";
                     $query1="update game_list set flag_plantoplay=1 where list_id='$list_id' and entry_id='$entry_id'";
                     $query2="update game_list set flag_allgames=1 where list_id='$list_id' and entry_id='$entry_id'";
+                    $DB->save($query0);
                     $DB->save($query1);
                     $DB->save($query2);
                     return false;
