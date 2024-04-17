@@ -211,6 +211,12 @@
                 }
             }
         }
+        public function rate($list_id,$entry_id,$rating)
+        {
+            $query="update game_list set rating='$rating' where list_id='$list_id' and entry_id='$entry_id'";
+            $DB= new Database();
+            $DB->save($query);   
+        }
         private function create_entryid()
         {
             $length=rand(4,19);
