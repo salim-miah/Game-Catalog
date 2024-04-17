@@ -39,6 +39,7 @@
         $gl= new GameList();
         $user_id=$_SESSION['gamelist_userid'];
         $game_id=$_SESSION['game_id'];
+        $rating=$_POST['rate'];
         $status='completed';
         $list_id=$gl->check_userlist($user_id);
         $entry_id="";
@@ -47,6 +48,7 @@
             $id=$gl->create_new_game_list($user_id,$game_id,$status);
             $list_id=$id[0];
             $entry_id=$id[1];
+            $gl->rate($list_id,$entry_id,$rating);
         }
         else
         {
@@ -62,10 +64,15 @@
                     echo "The Game already exists in the list";
                     echo "</div>";
                 }
+                else
+                {
+                    $gl->rate($list_id,$entry_id,$rating);
+                }
             }
             else //if the game is not added before
             {
                 $entry_id=$gl->create_existing_game_list($list_id,$game_id,$status);
+                $gl->rate($list_id,$entry_id,$rating);
             }
         }
     }
