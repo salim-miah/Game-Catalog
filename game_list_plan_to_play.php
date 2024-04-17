@@ -56,6 +56,25 @@
         color: #ffffff;
     }
 
+    #homepage {
+        float: right;
+        font-size: 15px;
+        margin-top: 15px;
+        margin-right: 10px;
+    }
+
+    #homepage a {
+            text-decoration: none;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #7da0ca7d;
+    }
+
+    #homepage a:hover {
+        background-color: #7da0cab2;  
+    }
+
     #second_bar{
         height: 50px;
         background: linear-gradient(to right, #052659, #367fa9); 
@@ -132,6 +151,7 @@
             <div style="float: right;font-size: 20px;margin: 10px;">
                 <div>Logged in as, <?php echo $name; ?></div>
             </div>
+            <div id="homepage"><a href="homepage.php">Go to homepage</a></div>
     </div>
     <div id="second_bar" style="width: 900px; margin: auto;">
         My Game List

@@ -89,6 +89,25 @@
         color: #ffffff;
     }
 
+    #homepage {
+        float: right;
+        font-size: 15px;
+        margin-top: 12px;
+        margin-right: 10px;
+    }
+
+    #homepage a {
+            text-decoration: none;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #7da0ca7d;
+    }
+
+    #homepage a:hover {
+        background-color: #7da0cab2;  
+    }
+
     #second_bar{
         height: 50px;
         background: linear-gradient(to right, #052659, #367fa9);
@@ -212,9 +231,10 @@
 
 <body style="font-family: georgia;  background: linear-gradient(to right, #052659, #367fa9);">
     <div id="top_bar">
-        <div style="width: 900px; margin: auto;font-size: 30px;">
-            <div style="float: left;">GameList</div> 
-            <?php echo "<div style='float: right'>Logged in as: $name</div>"; ?>
+        <div style="font-size: 25px;">
+            <div style="margin: 5px; float: left;">GameList</div> 
+            <?php echo "<div style='margin: 5px; float: right'>Logged in as: $name</div>"; ?>
+            <div id="homepage"><a href="homepage.php">Go to homepage</a></div>
         </div>
     </div>
     <div id="second_bar" style="width: 900px; margin: auto;">
