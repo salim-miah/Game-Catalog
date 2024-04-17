@@ -4,6 +4,7 @@
     include("classes/connect.php");
     include("classes/login.php");
     include("classes/user.php");
+    include("classes/gamelist.php");
 
     $name="";
 
@@ -33,6 +34,41 @@
         header("Location: login.php");
         die;
     } 
+    if($_SERVER['REQUEST_METHOD']=="POST")
+    {
+        $gl= new GameList();
+        $user_id=$_SESSION['gamelist_userid'];
+        $game_id=$_SESSION['game_id'];
+        $status='completed';
+        $list_id=$gl->check_userlist($user_id);
+        $entry_id="";
+        if ($list_id==NULL)
+        {
+            $id=$gl->create_new_game_list($user_id,$game_id,$status);
+            $list_id=$id[0];
+            $entry_id=$id[1];
+        }
+        else
+        {
+            $result=$gl->check_addinggames($game_id);
+            if ($result!=false)
+            {
+                $entry_id=$result;
+                $bool=$gl->check_flag($status,$list_id,$entry_id);
+                if ($bool==true)
+                {
+                    echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
+                    echo "The following errors occured<br><br>";
+                    echo "The Game already exists in the list";
+                    echo "</div>";
+                }
+            }
+            else //if the game is not added before
+            {
+                $entry_id=$gl->create_existing_game_list($list_id,$game_id,$status);
+            }
+        }
+    }
 ?>
 
 
@@ -265,7 +301,7 @@
     <div style="width: 900px; color: #ffffff; font-size: 25px; margin: auto; margin-top: 5px;">
         <span style="text-decoration: underline; padding-bottom: 5px;">Rate the game</span><br>
         <form method="post">
-            <div class="rate">
+        <div class="rate">
                     <input type="radio" id="star10" name="rate" value="10" />
                     <label for="star10" title="text">10 stars</label>
                     <input type="radio" id="star9" name="rate" value="9" />
