@@ -178,19 +178,42 @@
         color: #c59b08;
     }
 
-    #add {
-        float: right; 
-        text-decoration: none; 
-        color: #fff; 
-        padding: 5px 10px; 
-        border-radius: 5px; 
-        border: none; 
-        background-color: #7da0ca7d; 
-        font-size: 22px
-    }
-    #add:hover{
-        background-color: #7da0cab2; 
-    }
+    .button-24 {
+            background: #cf142b;
+            border: 1px solid #FF4742;
+            border-radius: 6px;
+            box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: inline-block;
+            font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 16px;
+            min-height: 40px;
+            outline: 0;
+            padding: 12px 14px;
+            text-align: center;
+            text-rendering: geometricprecision;
+            text-transform: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: middle;
+            float: right;
+        }
+
+        .button-24:hover,
+        .button-24:active {
+            background-color: initial;
+            background-position: 0 0;
+            color: #FF4742;
+        }
+
+        .button-24:active {
+            opacity: .5;
+        }
 
     nav {
             color: #fff;
@@ -262,6 +285,16 @@
         </div>
     </div>
     <br>
+    <div id="review">
+        <div>
+            <span style="text-decoration: underline; padding-bottom: 5px;">Reason to drop:</span><br>
+            <form method="post">
+                <textarea id="review_input" rows="4" cols="50" maxlength="500" name="review"></textarea>
+                <br>
+            </form>
+        </div>
+    </div>
+    <br>
     <div style="width: 900px; color: #ffffff; font-size: 25px; margin: auto; margin-top: 5px;">
         <span style="text-decoration: underline; padding-bottom: 5px;">Rate the game</span><br>
         <form method="post">
@@ -288,7 +321,7 @@
                     <label for="star1" title="text">1 star</label>
             </div>
             <br>
-            <input type="submit" value="Add to list" name="add_to_list" id="add">
+            <input type="submit" value="Confirm to Drop" name="add_to_list" class="button-24">
         </form>
     </div>
 </body>
