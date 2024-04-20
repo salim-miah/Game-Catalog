@@ -248,6 +248,8 @@
                 $game_id=$_SESSION['game_id'];
                 $result=$details->view_game_details($game_id);
                 $game_details=$result[0];
+                $result1 = $details->view_game_platforms($game_id);
+                $platforms = $result1;   
                 echo '<img id="game_image" src="';
                 echo $game_details['images']; 
                 echo '"alt="Game Picture">';
@@ -265,6 +267,14 @@
                 echo " <br>";
                 echo "Developer: ";
                 echo $game_details['developer'];
+                echo " <br>";
+                echo "Platforms: ";
+                $y = count($platforms)-2;
+                for ($x = 0; $x <= $y; $x++) {
+                echo $platforms[$x]['platform'];
+                echo ' , ';
+                }
+                echo $platforms[$y+1]['platform'];
                 echo " <br>";
             ?>
         </div>

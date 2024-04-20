@@ -42,6 +42,14 @@
             $g = new Database();
             $result=$g->read($query);
             return $result;
+        }        
+        
+        public function view_game_platforms($game_id)
+        {
+            $query = "select platform from platforms where game_id = '$game_id'";
+            $g = new Database();
+            $result=$g->read($query);
+            return $result;
         }
 
     }
