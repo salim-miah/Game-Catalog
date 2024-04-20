@@ -43,8 +43,23 @@
     {
         if (isset($_POST['drop']))
         {
-            
-        }        
+            $game_id=$_POST['drop'];
+            session_start();
+            $_SESSION['game_id']=$game_id;
+            header("Location: add_to_list_dropped.php");
+            die;
+        } 
+        else
+        {
+            $game_id="";
+            foreach ($_POST as $key=>$value)
+            {
+                $game_id=$key;
+            }
+
+            $viewdetails= new ViewDetails();
+            $viewdetails->create_session($game_id);
+        }
     }
 
 ?>
