@@ -305,7 +305,6 @@
                 <a href="add_to_list_plan_to_play.php">Plan to Play</a>
                 <a href="add_to_list_currently_playing.php">Currently Playing</a>
                 <a href="add_to_list_completed.php">Completed</a>
-                <a href="add_to_list_dropped.php">Dropped</a>
             </nav>
         </div>
     </div>
