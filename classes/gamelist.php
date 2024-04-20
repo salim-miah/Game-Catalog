@@ -211,6 +211,13 @@
                 }
             }
         }
+        public function extract_all_games($list_id)
+        {
+            $query= "select game_list.list_id,game_list.entry_id,games.game_id,name,genre,release_date,images from ((game_list inner join addinggames on game_list.list_id=addinggames.list_id and game_list.entry_id=addinggames.entry_id) inner join games on addinggames.game_id=games.game_id) where game_list.list_id='$list_id'";
+            $DB= new Database();
+            $result= $DB->read($query);
+            return $result;
+        }
         public function rate($list_id,$entry_id,$rating)
         {
             $query="update game_list set rating='$rating' where list_id='$list_id' and entry_id='$entry_id'";
