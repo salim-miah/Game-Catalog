@@ -5,7 +5,7 @@
     include("classes/login.php");
     include("classes/user.php");
     include("classes/view_details.php");
-
+    include("classes/gamelist.php");
     $name="";
 
     //Check if user is logged in
@@ -37,6 +37,11 @@
     {
         header("Location: login.php");
         die;
+    }
+
+    if ($_SERVER['REQUEST_METHOD']=="POST")
+    {
+        
     }
 
 ?>
@@ -120,7 +125,7 @@
         width: 900px; 
         margin: auto; 
         background: linear-gradient(to right, #052659, #367fa9); 
-        height: 480px;
+        min-height: 480px;
         margin-top: 5px;
         font-size: 20px;
     }
@@ -138,7 +143,81 @@
         align-items: center;
     }
 
+        .game-bar {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #7da0ca7d;
+            margin-bottom: 10px;
+        }
 
+        .serial-number {
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 10px;
+            color: #fff;
+        }
+
+        .game-image {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+        }
+
+        .game-info {
+            flex-grow: 1;
+        }
+
+        .game-name {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .game-details {
+            color: blue;
+            text-decoration: none;
+        }
+
+        .game-details:hover {
+            text-decoration: underline;
+        }
+        .button-24 {
+            background: #cf142b;
+            border: 1px solid #FF4742;
+            border-radius: 6px;
+            box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: inline-block;
+            font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 16px;
+            min-height: 40px;
+            outline: 0;
+            padding: 12px 14px;
+            text-align: center;
+            text-rendering: geometricprecision;
+            text-transform: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: middle;
+            float: right;
+        }
+
+        .button-24:hover,
+        .button-24:active {
+            background-color: initial;
+            background-position: 0 0;
+            color: #FF4742;
+        }
+
+        .button-24:active {
+            opacity: .5;
+        }
 
 </style>
 
@@ -171,9 +250,49 @@
                 <a href="game_list_plan_to_play.php">Plan to Play</a>   
                 <a href="game_list_my_reviews.php">My Reviews</a>
             </nav>
-        </div>
-        <div id="list_title">
-            All Games
+            <div id="list_title">
+                All Games
+            </div>
+            <br>
+            <?php
+
+                $gl = new GameList();
+                $list_id = $gl->check_userlist($id);
+                $result=$gl->extract_all_games($list_id);
+                $serial_number=1;
+                foreach ($result as $key=>$value)
+                {
+                    echo '<div class="game-bar">';
+                    echo '<div class="serial-number">';
+                    echo $serial_number;
+                    echo '</div>';
+                    echo '<img class="game-image" src="';
+                    echo $value['images']; 
+                    echo '"alt="Game 1">';
+                    echo '<div class="game-info">';
+                    echo '<div class="game-name">';
+                    echo $value['name'];
+                    echo '</div>';
+                    echo '<form method="post">';
+                    echo '<input type="submit" value="View Details" style="background-color: #7da0ca7d; color: #fff; padding: 5px 10px; border-radius: 5px; border: none;" name=';
+                    echo $value['game_id'];
+                    echo '>';
+                    echo '<button class="button-24" name="drop" value="';
+                    echo $value['game_id'];
+                    echo '">Drop</button>';
+                    echo '</form>';
+                    echo '<div style="float: right; color: #fff;margin-right: 50px;">';
+                    echo 'Genre: ';
+                    echo $value['genre'];
+                    echo '<br>';
+                    echo 'Rating: ';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                    $serial_number++;
+                }
+
+            ?>
         </div>
     </div>
    
