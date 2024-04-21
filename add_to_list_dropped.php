@@ -336,7 +336,8 @@
                     <textarea id="review_input" rows="4" cols="50" maxlength="500" name="reason"></textarea>
                     <br>
             </div>
-                <input type="submit" value="Confirm to Drop" name="add_to_list" class="button-24">
+            <br>
+            <input type="submit" value="Confirm to Drop" name="add_to_list" class="button-24">
         </div>
     </form>
 </body>
