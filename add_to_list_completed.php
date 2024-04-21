@@ -33,7 +33,7 @@
     {
         header("Location: login.php");
         die;
-    } 
+    }
     if($_SERVER['REQUEST_METHOD']=="POST")
     {
         $gl= new GameList();

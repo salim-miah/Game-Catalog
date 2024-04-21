@@ -164,6 +164,16 @@
                 $serial_number=1;
                 foreach ($game_data as $key=>$value)
                 {
+                    $gameid = $value["game_id"];
+                    $result = $games->get_rating($gameid);
+                    $rating = '-';
+                    if ($result != false)
+                    {
+                        $row = $result[0];
+                        $rating = $row['ratings'];
+                        $rating = round($rating,2);
+                    }
+
                     echo '<div class="game-bar">';
                     echo '<div class="serial-number">';
                     echo $serial_number;
@@ -185,6 +195,7 @@
                     echo $value['genre'];
                     echo '<br>';
                     echo 'Rating: ';
+                    echo $rating;
                     echo '</div>';
                     echo '</div>';
                     echo '</div>';
