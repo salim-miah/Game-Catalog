@@ -107,6 +107,21 @@
                 $id = array($list_id,$entry_id);
                 return $id; 
             }
+            elseif ($status=='dropped')
+            {
+                $flag=1;
+                $query1="insert into game_list(entry_id,flag_dropped,flag_allgames) values ('$entry_id','$flag','$flag')"; 
+                $query2="select list_id from game_list where entry_id='$entry_id' limit 1";
+                $create_list=$DB->save($query1);
+                $data=$DB->read($query2); // To extract the list_id
+                $row=$data[0];
+                $list_id=$row['list_id']; 
+                $query3="update user set list_id='$list_id' where user_id='$user_id'";
+                $this->addgame($game_id,$list_id,$entry_id);
+                $update_list_id=$DB->save($query3);
+                $id = array($list_id,$entry_id);
+                return $id; 
+            }
         }
         public function create_existing_game_list($list_id,$game_id,$status) //For users who don't have list_id valued NULL
         {
@@ -140,6 +155,14 @@
             {
                 $flag=1;
                 $query="insert into game_list(list_id,entry_id,flag_currentlyplaying,flag_allgames) values ('$list_id','$entry_id','$flag','$flag')";
+                $create_list=$DB->save($query);
+                $this->addgame($game_id,$list_id,$entry_id);
+                return $entry_id;
+            }
+            elseif ($status=='dropped')
+            {
+                $flag=1;
+                $query="insert into game_list(list_id,entry_id,flag_dropped,flag_allgames) values ('$list_id','$entry_id','$flag','$flag')";
                 $create_list=$DB->save($query);
                 $this->addgame($game_id,$list_id,$entry_id);
                 return $entry_id;
@@ -210,6 +233,27 @@
                     return true;
                 }
             }
+            elseif ($status=="dropped")
+            {
+                $query="select * from game_list where list_id='$list_id' and entry_id='$entry_id'";
+                $DB= new Database();
+                $result=$DB->read($query);
+                $row=$result[0];
+                if ($row['flag_dropped']==0 or $row['flag_dropped']==NULL)
+                {
+                    $query0="update game_list set flag_plantoplay=0, flag_completed=0, flag_currentlyplaying=0 where list_id='$list_id' and entry_id='$entry_id'";
+                    $query1="update game_list set flag_dropped=1 where list_id='$list_id' and entry_id='$entry_id'";
+                    $query2="update game_list set flag_allgames=1 where list_id='$list_id' and entry_id='$entry_id'";
+                    $DB->save($query0);
+                    $DB->save($query1);
+                    $DB->save($query2);
+                    return false;
+                }       
+                else
+                {
+                    return true;
+                }
+            }
         }
         public function extract_all_games($list_id)
         {
@@ -264,6 +308,12 @@
                 $entryid.=rand(0,9);
             }
             return $entryid;
+        }
+        public function reason_of_dropping($list_id,$entry_id,$reason)
+        {
+            $query= "update game_list set reeason_of_dropping = '$reason' where list_id='$list_id' and entry_id='$entry_id'";
+            $DB= new Database();
+            $DB->save($query);
         }
         
     }
