@@ -41,18 +41,12 @@
 
     if ($_SERVER['REQUEST_METHOD']=="POST")
     {
-        if (isset($_POST['drop']))
-        {
-            $game_id=$_POST['drop'];
-            session_start();
-            $_SESSION['game_id']=$game_id;
-            header("Location: add_to_list_dropped.php");
-            die;
-        } 
-        elseif (isset($_POST['delete']))
-        {
-
-        }
+            $gl= new GameList();
+            $user_id=$_SESSION['gamelist_userid'];
+            $game_id=$_POST['delete'];
+            $list_id=$gl->check_userlist($user_id);
+            $entry_id=$gl->check_addinggames($game_id,$list_id);
+            $gl->delete_reviewlist($list_id,$entry_id,$review);
     }
 
 ?>
@@ -367,7 +361,9 @@
                         echo '</div>';
                         echo '<div style="float: right">';
                         echo '<form method="post">';
-                        echo '<button name="delete" value="delete" style="float: right; background-color: transparent; border: none">';
+                        echo '<button name="delete" value="';
+                        echo $value['game_id']; 
+                        echo '" style="float: right; background-color: transparent; border: none">';
                         echo '<div class="icon-trash" style="float: left">';
                         echo '<div class="trash-lid" style="background-color: #cf142b"></div>';
                         echo '<div class="trash-container" style="background-color: #cf142b"></div>';

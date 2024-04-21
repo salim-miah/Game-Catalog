@@ -49,10 +49,6 @@
             header("Location: add_to_list_dropped.php");
             die;
         } 
-        elseif (isset($_POST['delete']))
-        {
-
-        }
         else
         {
             $game_id="";
@@ -400,15 +396,6 @@
                         echo '<input type="submit" value="View Details" style="background-color: #7da0ca7d; color: #fff; padding: 5px 10px; border-radius: 5px; border: none;" name=';
                         echo $value['game_id'];
                         echo '>';
-                        echo '<button name="delete" value="delete" style="float: right; background-color: transparent; border: none">';
-                        echo '<div class="icon-trash" style="float: left">';
-                        echo '<div class="trash-lid" style="background-color: #cf142b"></div>';
-                        echo '<div class="trash-container" style="background-color: #cf142b"></div>';
-                        echo '<div class="trash-line-1"></div>';
-                        echo '<div class="trash-line-2"></div>';
-                        echo '<div class="trash-line-3"></div>';
-                        echo '</div>';
-                        echo '</button>';
                         echo '</form>';
                         echo '<div style="float: right; color: #fff;margin-right: 50px;">';
                         echo 'Genre: ';

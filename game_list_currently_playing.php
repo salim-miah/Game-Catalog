@@ -52,7 +52,13 @@
         } 
         elseif (isset($_POST['delete']))
         {
-
+            $gl= new GameList();
+            $user_id=$_SESSION['gamelist_userid'];
+            $game_id=$_POST['delete'];
+            $list_id=$gl->check_userlist($user_id);
+            $entry_id=$gl->check_addinggames($game_id,$list_id);
+            $status='flag_currentlyplaying';
+            $gl->delete_list($list_id,$entry_id,$status);
         }
         else
         {
@@ -401,7 +407,9 @@
                         echo '<input type="submit" value="View Details" style="background-color: #7da0ca7d; color: #fff; padding: 5px 10px; border-radius: 5px; border: none;" name=';
                         echo $value['game_id'];
                         echo '>';
-                        echo '<button name="delete" value="delete" style="float: right; background-color: transparent; border: none">';
+                        echo '<button name="delete" value="';
+                        echo $value['game_id']; 
+                        echo '" style="float: right; background-color: transparent; border: none">';
                         echo '<div class="icon-trash" style="float: left">';
                         echo '<div class="trash-lid" style="background-color: #cf142b"></div>';
                         echo '<div class="trash-container" style="background-color: #cf142b"></div>';
