@@ -40,7 +40,7 @@
         $gl= new GameList();
         $user_id=$_SESSION['gamelist_userid'];
         $game_id=$_SESSION['game_id'];
-        $review=$_POST['review'];
+        $review=addslashes($_POST['review']);
         $status='review';
         $list_id=$gl->check_userlist($user_id);
         $entry_id="";
