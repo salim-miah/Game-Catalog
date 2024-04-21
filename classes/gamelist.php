@@ -10,14 +10,14 @@
             $row=$result[0];
             return $row['list_id'];
         }
-        public function check_addinggames($game_id)
+        public function check_addinggames($game_id,$list_id)
         {
-            $query="select * from addinggames where game_id='$game_id' limit 1";
+            $query="select * from addinggames where game_id='$game_id' and list_id='$list_id' limit 1";
             $DB= new Database();
             $result=$DB->read($query);
             if ($result)
             {
-                $query="select list_id,entry_id from addinggames where game_id='$game_id' limit 1";
+                $query="select list_id,entry_id from addinggames where game_id='$game_id' and list_id='$list_id' limit 1";
                 $data=$DB->read($query);
                 $row=$data[0];
                 return $row['entry_id'];

@@ -52,6 +52,7 @@
             return $result;
         }
 
+
         public function get_rating( $game_id )
         {
             $query = "select avg(rating) as ratings from (addinggames inner join game_list on addinggames.list_id=game_list.list_id and addinggames.entry_id=game_list.entry_id) where game_id= '$game_id' and rating!=0 group by game_id";
@@ -60,6 +61,15 @@
             return $result;
         }
 
+
+        public function extract_games_by_rating()
+        {
+            $query = "select * from games order by rating ASC";
+            $g = new Database();
+            $result=$g->read($query);
+            return $result;
+
+        }
     }
 
 ?>

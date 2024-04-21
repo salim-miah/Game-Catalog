@@ -52,7 +52,7 @@
         }
         else
         {
-            $result=$gl->check_addinggames($game_id);
+            $result=$gl->check_addinggames($game_id,$list_id);
             if ($result!=false)
             {
                 $entry_id=$result;
