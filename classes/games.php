@@ -52,6 +52,14 @@
             return $result;
         }
 
+        public function extract_games_by_rating()
+        {
+            $query = "select * from games order by rating ASC";
+            $g = new Database();
+            $result=$g->read($query);
+            return $result;
+
+        }
     }
 
 ?>
