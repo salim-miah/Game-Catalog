@@ -42,7 +42,7 @@
         $status='dropped';
         $list_id=$gl->check_userlist($user_id);
         $entry_id="";
-        $reason=$_POST['reason'];
+        $reason=addslashes($_POST['reason']);
         if ($list_id==NULL)
         {
             $id=$gl->create_new_game_list($user_id,$game_id,$status);
