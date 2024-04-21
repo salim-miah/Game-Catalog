@@ -279,7 +279,7 @@
 
         public function extract_dropped($list_id)
         {
-            $query= "select game_list.list_id,game_list.entry_id,games.game_id,name,genre,release_date,images from ((game_list inner join addinggames on game_list.list_id=addinggames.list_id and game_list.entry_id=addinggames.entry_id) inner join games on addinggames.game_id=games.game_id) where game_list.list_id='$list_id' and game_list.flag_dropped=1";
+            $query= "select game_list.list_id,game_list.entry_id,game_list.reeason_of_dropping,games.game_id,name,genre,release_date,images from ((game_list inner join addinggames on game_list.list_id=addinggames.list_id and game_list.entry_id=addinggames.entry_id) inner join games on addinggames.game_id=games.game_id) where game_list.list_id='$list_id' and game_list.flag_dropped=1";
             $DB= new Database();
             $result= $DB->read($query);
             return $result;
