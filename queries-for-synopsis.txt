@@ -1,4 +1,4 @@
-ALTER TABLE games ADD images varchar(400);
+ALTER TABLE games ADD synopsis varchar(400);
 
 update games set synopsis=("A proud yet innocent prince is being chased by The Dahaka (Guardian of Time) as a consequence of his actions. He seeks aid from The Empress of Time to escape from the notion that he cannot change his fate.") where game_id=1;
 update games set synopsis=("A young prince with expert fighting skills acquires the Dagger of Time, and unknowingly releases the powerful Sands of Time with it. Now he is trapped in a palace with sand creatures and must undo the unfortunate deed he has done.") where game_id=2;
