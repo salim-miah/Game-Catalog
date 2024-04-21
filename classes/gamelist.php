@@ -323,6 +323,76 @@
             $result=$DB->read($query);
             return $result;
         }
+
+        public function delete_list($list_id,$entry_id,$status)
+        {
+            $result=$this->check_review_flag($list_id,$entry_id);
+            if ($result)
+            {
+                $query="update game_list set $status=0 where list_id='$list_id' and entry_id='$entry_id'";
+                $DB= new Database();
+                $DB->save($query);
+            }
+            else{
+                $query1="delete from addinggames where list_id='$list_id' and entry_id='$entry_id'";
+                $query2="delete from game_list where list_id='$list_id' and entry_id='$entry_id'";
+                $DB= new Database();
+                $DB->save($query1);
+                try {
+                    $DB->save($query2);
+                }
+                catch(Exception $e) {
+                    if ($status=="flag_currentlyplaying")
+                    {
+                        header("Location: game_list_currently_playing.php");
+                        die;    
+                    }
+                    elseif ($status=="flag_plantoplay")
+                    {
+                        header("Location: game_list_plan_to_play.php");
+                        die;
+                    }
+                    elseif ($status=="flag_dropped")
+                    {
+                        header("Location: game_list_dropped.php");
+                        die;
+                    }
+                    elseif ($status=="flag_completed")
+                    {
+                        header("Location: game_list_completed.php");
+                        die;
+                    }
+                    elseif ($status=="flag_review")
+                    {
+                        header("Location: game_list_my_reviews.php");
+                        die;
+                    }
+                }
+            }
+        }
+
+        // public delete_reviewlist($list_id,$entry_id,$review)
+        // {
+        //         $query="delete from reviews where list_id='$list_id' and entry_id='$entry_id' and review='$review'";
+        //         $DB= new Database();
+        //         $DB->save($query);
+        // }
+
+        private function check_review_flag($list_id,$entry_id)
+        {
+            $query="select flag_review from game_list where list_id='$list_id' and entry_id='$entry_id'";
+            $DB= new Database();
+            $result=$DB->read($query);
+            $row=$result[0];
+            $flag_review=$row['flag_review'];
+            if ($flag_review==0)
+            {
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
         
     }
 
