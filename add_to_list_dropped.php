@@ -4,6 +4,7 @@
     include("classes/connect.php");
     include("classes/login.php");
     include("classes/user.php");
+    include("classes/gamelist.php");
 
     $name="";
 
@@ -32,7 +33,50 @@
     {
         header("Location: login.php");
         die;
-    } 
+    }
+    if($_SERVER['REQUEST_METHOD']=="POST")
+    {   print_r($_POST);
+        $gl= new GameList();
+        $user_id=$_SESSION['gamelist_userid'];
+        $game_id=$_SESSION['game_id'];
+        $status='dropped';
+        $list_id=$gl->check_userlist($user_id);
+        $entry_id="";
+        $reason=$_POST['reason'];
+        if ($list_id==NULL)
+        {
+            $id=$gl->create_new_game_list($user_id,$game_id,$status);
+            $list_id=$id[0];
+            $entry_id=$id[1];
+            $gl->rate($list_id,$entry_id,$rating);
+        }
+        else
+        {
+            $result=$gl->check_addinggames($game_id);
+            if ($result!=false)
+            {
+                $entry_id=$result;
+                $bool=$gl->check_flag($status,$list_id,$entry_id);
+                if ($bool==true)
+                {
+                    echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
+                    echo "The following errors occured<br><br>";
+                    echo "The Game is already dropped";
+                    echo "</div>";
+                }
+                else
+                {
+                    $gl->reason_of_dropping($list_id,$entry_id,$reason);
+                }
+            }
+            else //if the game is not added before
+            {
+                $entry_id=$gl->create_existing_game_list($list_id,$game_id,$status);
+            }
+        }
+    }
+
+    
 ?>
 
 
@@ -285,45 +329,17 @@
         </div>
     </div>
     <br>
-    <div id="review">
-        <div>
-            <span style="text-decoration: underline; padding-bottom: 5px;">Reason to drop:</span><br>
-            <form method="post">
-                <textarea id="review_input" rows="4" cols="50" maxlength="500" name="review"></textarea>
-                <br>
-            </form>
-        </div>
-    </div>
-    <br>
-    <div style="width: 900px; color: #ffffff; font-size: 25px; margin: auto; margin-top: 5px;">
-        <span style="text-decoration: underline; padding-bottom: 5px;">Rate the game</span><br>
-        <form method="post">
-            <div class="rate">
-                    <input type="radio" id="star10" name="rate" value="10" />
-                    <label for="star10" title="text">10 stars</label>
-                    <input type="radio" id="star9" name="rate" value="9" />
-                    <label for="star9" title="text">9 stars</label>
-                    <input type="radio" id="star8" name="rate" value="8" />
-                    <label for="star8" title="text">8 stars</label>
-                    <input type="radio" id="star7" name="rate" value="7" />
-                    <label for="star7" title="text">7 stars</label>
-                    <input type="radio" id="star6" name="rate" value="6" />
-                    <label for="star6" title="text">6 stars</label>
-                    <input type="radio" id="star5" name="rate" value="5" />
-                    <label for="star5" title="text">5 stars</label>
-                    <input type="radio" id="star4" name="rate" value="4" />
-                    <label for="star4" title="text">4 stars</label>
-                    <input type="radio" id="star3" name="rate" value="3" />
-                    <label for="star3" title="text">3 stars</label>
-                    <input type="radio" id="star2" name="rate" value="2" />
-                    <label for="star2" title="text">2 stars</label>
-                    <input type="radio" id="star1" name="rate" value="1" />
-                    <label for="star1" title="text">1 star</label>
+    <form method="POST">
+        <div id="review">
+            <div>
+                <span style="text-decoration: underline; padding-bottom: 5px;">Reason to drop:</span><br>
+                    <textarea id="review_input" rows="4" cols="50" maxlength="500" name="reason"></textarea>
+                    <br>
             </div>
             <br>
             <input type="submit" value="Confirm to Drop" name="add_to_list" class="button-24">
-        </form>
-    </div>
+        </div>
+    </form>
 </body>
 </html>
 

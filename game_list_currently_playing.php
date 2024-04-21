@@ -5,6 +5,7 @@
     include("classes/login.php");
     include("classes/user.php");
     include("classes/view_details.php");
+    include("classes/gamelist.php");
 
     $name="";
 
@@ -37,6 +38,33 @@
     {
         header("Location: login.php");
         die;
+    }
+
+    if ($_SERVER['REQUEST_METHOD']=="POST")
+    {
+        if (isset($_POST['drop']))
+        {
+            $game_id=$_POST['drop'];
+            session_start();
+            $_SESSION['game_id']=$game_id;
+            header("Location: add_to_list_dropped.php");
+            die;
+        } 
+        elseif (isset($_POST['delete']))
+        {
+
+        }
+        else
+        {
+            $game_id="";
+            foreach ($_POST as $key=>$value)
+            {
+                $game_id=$key;
+            }
+
+            $viewdetails= new ViewDetails();
+            $viewdetails->create_session($game_id);
+        }
     }
 
 ?>
@@ -120,7 +148,7 @@
         width: 900px; 
         margin: auto; 
         background: linear-gradient(to right, #052659, #367fa9); 
-        height: 480px;
+        min-height: 480px;
         margin-top: 5px;
         font-size: 20px;
     }
@@ -138,7 +166,180 @@
         align-items: center;
     }
 
+    .game-bar {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #7da0ca7d;
+            margin-bottom: 10px;
+        }
 
+        .serial-number {
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 10px;
+            color: #fff;
+        }
+
+        .game-image {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+        }
+
+        .game-info {
+            flex-grow: 1;
+        }
+
+        .game-name {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .game-details {
+            color: blue;
+            text-decoration: none;
+        }
+
+        .game-details:hover {
+            text-decoration: underline;
+        }
+        .button-24 {
+            background: #cf142b;
+            border: 1px solid #FF4742;
+            border-radius: 6px;
+            box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: inline-block;
+            font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 16px;
+            min-height: 40px;
+            outline: 0;
+            padding: 12px 14px;
+            text-align: center;
+            text-rendering: geometricprecision;
+            text-transform: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: middle;
+            float: right;
+        }
+
+        .button-24:hover,
+        .button-24:active {
+            background-color: initial;
+            background-position: 0 0;
+            color: #FF4742;
+        }
+
+        .button-24:active {
+            opacity: .5;
+        }
+
+        .icon-trash {
+        width: 40px;
+        height: 40px;
+        position: relative;
+        overflow: hidden;
+        margin-left: 25px;
+        margin-bottom: 25px;
+        }
+        
+        .icon-trash .trash-lid {
+        width: 62%;
+        height: 10%;
+        position: absolute;
+        left: 50%;
+        margin-left: -31%;
+        top: 10.5%;
+        background-color: #000;
+        border-top-left-radius: 80%;
+        border-top-right-radius: 80%;
+        -webkit-transform: rotate(-5deg);
+        -moz-transform: rotate(-5deg);
+        -ms-transform: rotate(-5deg);
+        transform: rotate(-5deg); 
+        }
+
+        .icon-trash .trash-lid:after {
+        content: "";
+        width: 26%;
+        height: 100%;
+        position: absolute;
+        left: 50%;
+        margin-left: -13%;
+        margin-top: -10%;
+        background-color: inherit;
+        border-top-left-radius: 30%;
+        border-top-right-radius: 30%;
+        -webkit-transform: rotate(-1deg);
+        -moz-transform: rotate(-1deg);
+        -ms-transform: rotate(-1deg);
+        transform: rotate(-1deg); 
+        }
+
+        .icon-trash .trash-container {
+        width: 56%;
+        height: 65%;
+        position: absolute;
+        left: 50%;
+        margin-left: -28%;
+        bottom: 10%;
+        background-color: #000;
+        border-bottom-left-radius: 15%;
+        border-bottom-right-radius: 15%;
+        }
+
+        .icon-trash .trash-container:after {
+        content: "";
+        width: 110%;
+        height: 12%;
+        position: absolute;
+        left: 50%;
+        margin-left: -55%;
+        top: 0;
+        background-color: inherit;
+        border-bottom-left-radius: 45%;
+        border-bottom-right-radius: 45%;
+        }
+
+
+
+        .icon-trash .trash-line-1 {
+        width: 4%;
+        height: 50%;
+        position: absolute;
+        left: 38%;
+        margin-left: -2%;
+        bottom: 17%;
+        background-color: #252527;
+        }
+
+        .icon-trash .trash-line-2 {
+        width: 4%;
+        height: 50%;
+        position: absolute;
+        left: 50%;
+        margin-left: -2%;
+        bottom: 17%;
+        background-color: #252527;
+        }
+
+        .icon-trash .trash-line-3 {
+        width: 4%;
+        height: 50%;
+        position: absolute;
+        left: 62%;
+        margin-left: -2%;
+        bottom: 17%;
+        background-color: #252527;
+        }
 
 </style>
 
@@ -171,10 +372,62 @@
                 <a href="game_list_plan_to_play.php">Plan to Play</a>   
                 <a href="game_list_my_reviews.php">My Reviews</a>
             </nav>
+            <div id="list_title">
+                Currently playing
+            </div>
+            <br>
+            <?php
+
+                $gl = new GameList();
+                $list_id = $gl->check_userlist($id);
+                $result=$gl->extract_currently_playing($list_id);
+                if ($result==true)
+                {
+                    $serial_number=1;
+                    foreach ($result as $key=>$value)
+                    {
+                        echo '<div class="game-bar">';
+                        echo '<div class="serial-number">';
+                        echo $serial_number;
+                        echo '</div>';
+                        echo '<img class="game-image" src="';
+                        echo $value['images']; 
+                        echo '"alt="Game 1">';
+                        echo '<div class="game-info">';
+                        echo '<div class="game-name">';
+                        echo $value['name'];
+                        echo '</div>';
+                        echo '<form method="post">';
+                        echo '<input type="submit" value="View Details" style="background-color: #7da0ca7d; color: #fff; padding: 5px 10px; border-radius: 5px; border: none;" name=';
+                        echo $value['game_id'];
+                        echo '>';
+                        echo '<button name="delete" value="delete" style="float: right; background-color: transparent; border: none">';
+                        echo '<div class="icon-trash" style="float: left">';
+                        echo '<div class="trash-lid" style="background-color: #cf142b"></div>';
+                        echo '<div class="trash-container" style="background-color: #cf142b"></div>';
+                        echo '<div class="trash-line-1"></div>';
+                        echo '<div class="trash-line-2"></div>';
+                        echo '<div class="trash-line-3"></div>';
+                        echo '</div>';
+                        echo '</button>';
+                        echo '<button class="button-24" name="drop" value="';
+                        echo $value['game_id'];
+                        echo '">Drop</button>';
+                        echo '</form>';
+                        echo '<div style="float: right; color: #fff;margin-right: 50px;">';
+                        echo 'Genre: ';
+                        echo $value['genre'];
+                        echo '<br>';
+                        echo 'Rating: ';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                        $serial_number++;
+                    }
+                }
+            ?>
         </div>
-        <div id="list_title">
-            Currently playing
-        </div>
+    
     </div>
    
 </body>

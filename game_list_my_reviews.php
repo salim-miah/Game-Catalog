@@ -5,7 +5,7 @@
     include("classes/login.php");
     include("classes/user.php");
     include("classes/view_details.php");
-
+    include("classes/gamelist.php");
     $name="";
 
     //Check if user is logged in
@@ -37,6 +37,22 @@
     {
         header("Location: login.php");
         die;
+    }
+
+    if ($_SERVER['REQUEST_METHOD']=="POST")
+    {
+        if (isset($_POST['drop']))
+        {
+            $game_id=$_POST['drop'];
+            session_start();
+            $_SESSION['game_id']=$game_id;
+            header("Location: add_to_list_dropped.php");
+            die;
+        } 
+        elseif (isset($_POST['delete']))
+        {
+
+        }
     }
 
 ?>
@@ -120,7 +136,7 @@
         width: 900px; 
         margin: auto; 
         background: linear-gradient(to right, #052659, #367fa9); 
-        height: 480px;
+        min-height: 480px;
         margin-top: 5px;
         font-size: 20px;
     }
@@ -138,7 +154,149 @@
         align-items: center;
     }
 
+    .game-bar {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #7da0ca7d;
+    }
+    .game-serial {
+        flex: 0 0 50px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        margin-right: 10px;
+        color: #fff;
+    }
+    .game-info {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        color: #fff;
+    }
+    .game-img {
+        width: 100px;
+        margin-right: 20px;
+    }
+    .game-details {
+        flex: 1;
+    }
+    .game-title {
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+    .game-genre {
+        font-style: italic;
+        color: #fff;
+    }
+    .game-rating {
+        margin-top: 5px;
+        color: #fff;
+    }
+    .game-review {
+        font-style: italic;
+        color: #fff;
+    }
 
+        .icon-trash {
+        width: 40px;
+        height: 40px;
+        position: relative;
+        overflow: hidden;
+        margin-left: 25px;
+        margin-bottom: 25px;
+        }
+        
+        .icon-trash .trash-lid {
+        width: 62%;
+        height: 10%;
+        position: absolute;
+        left: 50%;
+        margin-left: -31%;
+        top: 10.5%;
+        background-color: #000;
+        border-top-left-radius: 80%;
+        border-top-right-radius: 80%;
+        -webkit-transform: rotate(-5deg);
+        -moz-transform: rotate(-5deg);
+        -ms-transform: rotate(-5deg);
+        transform: rotate(-5deg); 
+        }
+
+        .icon-trash .trash-lid:after {
+        content: "";
+        width: 26%;
+        height: 100%;
+        position: absolute;
+        left: 50%;
+        margin-left: -13%;
+        margin-top: -10%;
+        background-color: inherit;
+        border-top-left-radius: 30%;
+        border-top-right-radius: 30%;
+        -webkit-transform: rotate(-1deg);
+        -moz-transform: rotate(-1deg);
+        -ms-transform: rotate(-1deg);
+        transform: rotate(-1deg); 
+        }
+
+        .icon-trash .trash-container {
+        width: 56%;
+        height: 65%;
+        position: absolute;
+        left: 50%;
+        margin-left: -28%;
+        bottom: 10%;
+        background-color: #000;
+        border-bottom-left-radius: 15%;
+        border-bottom-right-radius: 15%;
+        }
+
+        .icon-trash .trash-container:after {
+        content: "";
+        width: 110%;
+        height: 12%;
+        position: absolute;
+        left: 50%;
+        margin-left: -55%;
+        top: 0;
+        background-color: inherit;
+        border-bottom-left-radius: 45%;
+        border-bottom-right-radius: 45%;
+        }
+
+
+
+        .icon-trash .trash-line-1 {
+        width: 4%;
+        height: 50%;
+        position: absolute;
+        left: 38%;
+        margin-left: -2%;
+        bottom: 17%;
+        background-color: #252527;
+        }
+
+        .icon-trash .trash-line-2 {
+        width: 4%;
+        height: 50%;
+        position: absolute;
+        left: 50%;
+        margin-left: -2%;
+        bottom: 17%;
+        background-color: #252527;
+        }
+
+        .icon-trash .trash-line-3 {
+        width: 4%;
+        height: 50%;
+        position: absolute;
+        left: 62%;
+        margin-left: -2%;
+        bottom: 17%;
+        background-color: #252527;
+        }
 
 </style>
 
@@ -175,6 +333,59 @@
         <div id="list_title">
             My Reviews
         </div>
+        <br>
+            <?php
+
+                $gl = new GameList();
+                $list_id = $gl->check_userlist($id);
+                $result=$gl->extract_reviews($list_id);
+                if ($result==true)
+                {
+                    $serial_number=1;
+                    foreach ($result as $key=>$value)
+                    {
+                        echo '<div class="game-bar">';
+                        echo '<div class="game-serial">';
+                        echo $serial_number;
+                        echo '</div>';
+                        echo '<div class="game-info">';
+                        echo '<img src="';
+                        echo $value['images'];
+                        echo '" class="game-img">';
+                        echo '<div class="game-details">';
+                        echo '<div class="game-title">';
+                        echo $value['name'];
+                        echo '</div>';
+                        echo '<div class="game-genre">';
+                        echo "Genre: ";
+                        echo $value['genre'];
+                        echo '</div>';
+                        echo '<div class="game-rating">Rating: </div>';
+                        echo '<div class="game-review">';
+                        echo "My Review: ";
+                        echo $value['review'];
+                        echo '</div>';
+                        echo '<div style="float: right">';
+                        echo '<form method="post">';
+                        echo '<button name="delete" value="delete" style="float: right; background-color: transparent; border: none">';
+                        echo '<div class="icon-trash" style="float: left">';
+                        echo '<div class="trash-lid" style="background-color: #cf142b"></div>';
+                        echo '<div class="trash-container" style="background-color: #cf142b"></div>';
+                        echo '<div class="trash-line-1"></div>';
+                        echo '<div class="trash-line-2"></div>';
+                        echo '<div class="trash-line-3"></div>';
+                        echo '</div>';
+                        echo '</button>';
+                        echo '</form>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                        $serial_number++;
+                    }
+                }
+                
+            ?>
     </div>
    
 </body>
