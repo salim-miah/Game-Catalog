@@ -262,6 +262,37 @@
             $result= $DB->read($query);
             return $result;
         }
+        public function extract_currently_playing($list_id)
+        {
+            $query= "select game_list.list_id,game_list.entry_id,games.game_id,name,genre,release_date,images from ((game_list inner join addinggames on game_list.list_id=addinggames.list_id and game_list.entry_id=addinggames.entry_id) inner join games on addinggames.game_id=games.game_id) where game_list.list_id='$list_id' and game_list.flag_currentlyplaying=1";
+            $DB= new Database();
+            $result= $DB->read($query);
+            return $result;
+        }
+        public function extract_completed($list_id)
+        {
+            $query= "select game_list.list_id,game_list.entry_id,games.game_id,name,genre,release_date,images from ((game_list inner join addinggames on game_list.list_id=addinggames.list_id and game_list.entry_id=addinggames.entry_id) inner join games on addinggames.game_id=games.game_id) where game_list.list_id='$list_id' and game_list.flag_completed=1";
+            $DB= new Database();
+            $result= $DB->read($query);
+            return $result;
+        }
+
+        public function extract_dropped($list_id)
+        {
+            $query= "select game_list.list_id,game_list.entry_id,games.game_id,name,genre,release_date,images from ((game_list inner join addinggames on game_list.list_id=addinggames.list_id and game_list.entry_id=addinggames.entry_id) inner join games on addinggames.game_id=games.game_id) where game_list.list_id='$list_id' and game_list.flag_dropped=1";
+            $DB= new Database();
+            $result= $DB->read($query);
+            return $result;
+        }
+
+        public function extract_plantoplay($list_id)
+        {
+            $query= "select game_list.list_id,game_list.entry_id,games.game_id,name,genre,release_date,images from ((game_list inner join addinggames on game_list.list_id=addinggames.list_id and game_list.entry_id=addinggames.entry_id) inner join games on addinggames.game_id=games.game_id) where game_list.list_id='$list_id' and game_list.flag_plantoplay=1";
+            $DB= new Database();
+            $result= $DB->read($query);
+            return $result;
+        }
+
         public function rate($list_id,$entry_id,$rating)
         {
             $query="update game_list set rating='$rating' where list_id='$list_id' and entry_id='$entry_id'";
