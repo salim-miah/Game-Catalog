@@ -277,39 +277,42 @@
                 $gl = new GameList();
                 $list_id = $gl->check_userlist($id);
                 $result=$gl->extract_all_games($list_id);
-                $serial_number=1;
-                foreach ($result as $key=>$value)
+                if ($result==true)
                 {
-                    echo '<div class="game-bar">';
-                    echo '<div class="serial-number">';
-                    echo $serial_number;
-                    echo '</div>';
-                    echo '<img class="game-image" src="';
-                    echo $value['images']; 
-                    echo '"alt="Game 1">';
-                    echo '<div class="game-info">';
-                    echo '<div class="game-name">';
-                    echo $value['name'];
-                    echo '</div>';
-                    echo '<form method="post">';
-                    echo '<input type="submit" value="View Details" style="background-color: #7da0ca7d; color: #fff; padding: 5px 10px; border-radius: 5px; border: none;" name=';
-                    echo $value['game_id'];
-                    echo '>';
-                    echo '<button class="button-24" name="drop" value="';
-                    echo $value['game_id'];
-                    echo '">Drop</button>';
-                    echo '</form>';
-                    echo '<div style="float: right; color: #fff;margin-right: 50px;">';
-                    echo 'Genre: ';
-                    echo $value['genre'];
-                    echo '<br>';
-                    echo 'Rating: ';
-                    echo '</div>';
-                    echo '</div>';
-                    echo '</div>';
-                    $serial_number++;
+                    $serial_number=1;
+                    foreach ($result as $key=>$value)
+                    {
+                        echo '<div class="game-bar">';
+                        echo '<div class="serial-number">';
+                        echo $serial_number;
+                        echo '</div>';
+                        echo '<img class="game-image" src="';
+                        echo $value['images']; 
+                        echo '"alt="Game 1">';
+                        echo '<div class="game-info">';
+                        echo '<div class="game-name">';
+                        echo $value['name'];
+                        echo '</div>';
+                        echo '<form method="post">';
+                        echo '<input type="submit" value="View Details" style="background-color: #7da0ca7d; color: #fff; padding: 5px 10px; border-radius: 5px; border: none;" name=';
+                        echo $value['game_id'];
+                        echo '>';
+                        echo '<button class="button-24" name="drop" value="';
+                        echo $value['game_id'];
+                        echo '">Drop</button>';
+                        echo '</form>';
+                        echo '<div style="float: right; color: #fff;margin-right: 50px;">';
+                        echo 'Genre: ';
+                        echo $value['genre'];
+                        echo '<br>';
+                        echo 'Rating: ';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                        $serial_number++;
+                    }
                 }
-
+                
             ?>
         </div>
     </div>
