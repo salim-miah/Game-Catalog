@@ -50,6 +50,10 @@
             header("Location: add_to_list_dropped.php");
             die;
         } 
+        elseif (isset($_POST['delete']))
+        {
+
+        }
         else
         {
             $game_id="";
@@ -238,6 +242,105 @@
             opacity: .5;
         }
 
+        .icon-trash {
+        width: 40px;
+        height: 40px;
+        position: relative;
+        overflow: hidden;
+        margin-left: 25px;
+        margin-bottom: 25px;
+        }
+        
+        .icon-trash .trash-lid {
+        width: 62%;
+        height: 10%;
+        position: absolute;
+        left: 50%;
+        margin-left: -31%;
+        top: 10.5%;
+        background-color: #000;
+        border-top-left-radius: 80%;
+        border-top-right-radius: 80%;
+        -webkit-transform: rotate(-5deg);
+        -moz-transform: rotate(-5deg);
+        -ms-transform: rotate(-5deg);
+        transform: rotate(-5deg); 
+        }
+
+        .icon-trash .trash-lid:after {
+        content: "";
+        width: 26%;
+        height: 100%;
+        position: absolute;
+        left: 50%;
+        margin-left: -13%;
+        margin-top: -10%;
+        background-color: inherit;
+        border-top-left-radius: 30%;
+        border-top-right-radius: 30%;
+        -webkit-transform: rotate(-1deg);
+        -moz-transform: rotate(-1deg);
+        -ms-transform: rotate(-1deg);
+        transform: rotate(-1deg); 
+        }
+
+        .icon-trash .trash-container {
+        width: 56%;
+        height: 65%;
+        position: absolute;
+        left: 50%;
+        margin-left: -28%;
+        bottom: 10%;
+        background-color: #000;
+        border-bottom-left-radius: 15%;
+        border-bottom-right-radius: 15%;
+        }
+
+        .icon-trash .trash-container:after {
+        content: "";
+        width: 110%;
+        height: 12%;
+        position: absolute;
+        left: 50%;
+        margin-left: -55%;
+        top: 0;
+        background-color: inherit;
+        border-bottom-left-radius: 45%;
+        border-bottom-right-radius: 45%;
+        }
+
+
+
+        .icon-trash .trash-line-1 {
+        width: 4%;
+        height: 50%;
+        position: absolute;
+        left: 38%;
+        margin-left: -2%;
+        bottom: 17%;
+        background-color: #252527;
+        }
+
+        .icon-trash .trash-line-2 {
+        width: 4%;
+        height: 50%;
+        position: absolute;
+        left: 50%;
+        margin-left: -2%;
+        bottom: 17%;
+        background-color: #252527;
+        }
+
+        .icon-trash .trash-line-3 {
+        width: 4%;
+        height: 50%;
+        position: absolute;
+        left: 62%;
+        margin-left: -2%;
+        bottom: 17%;
+        background-color: #252527;
+        }
+
 </style>
 
 
@@ -298,6 +401,15 @@
                         echo '<input type="submit" value="View Details" style="background-color: #7da0ca7d; color: #fff; padding: 5px 10px; border-radius: 5px; border: none;" name=';
                         echo $value['game_id'];
                         echo '>';
+                        echo '<button name="delete" value="delete" style="float: right; background-color: transparent; border: none">';
+                        echo '<div class="icon-trash" style="float: left">';
+                        echo '<div class="trash-lid" style="background-color: #cf142b"></div>';
+                        echo '<div class="trash-container" style="background-color: #cf142b"></div>';
+                        echo '<div class="trash-line-1"></div>';
+                        echo '<div class="trash-line-2"></div>';
+                        echo '<div class="trash-line-3"></div>';
+                        echo '</div>';
+                        echo '</button>';
                         echo '<button class="button-24" name="drop" value="';
                         echo $value['game_id'];
                         echo '">Drop</button>';
