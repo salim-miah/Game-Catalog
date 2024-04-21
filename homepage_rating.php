@@ -159,7 +159,7 @@
             <?php
                 include("classes/games.php");
                 $games= new Games();
-                $game_data=$games->extract_games();
+                $game_data=$games->extract_games_by_rating();
                 $serial_number=1;
                 foreach ($game_data as $key=>$value)
                 {
