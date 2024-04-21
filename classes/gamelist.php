@@ -315,6 +315,14 @@
             $DB= new Database();
             $DB->save($query);
         }
+
+        public function extract_reviews($list_id)
+        {
+            $query="select game_list.list_id,game_list.entry_id,game_list.rating,games.game_id,review,games.name,games.images,games.genre from (((game_list inner join addinggames on game_list.list_id=addinggames.list_id and game_list.entry_id=addinggames.entry_id) inner join games on addinggames.game_id=games.game_id) inner join reviews on game_list.list_id=reviews.list_id and game_list.entry_id=reviews.entry_id) where game_list.list_id='$list_id'";
+            $DB= new Database();
+            $result=$DB->read($query);
+            return $result;
+        }
         
     }
 
