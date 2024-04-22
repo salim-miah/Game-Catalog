@@ -59,7 +59,6 @@
             {
                 $entry_id=$result;
                 $DB = new Database();
-                $DB->save($query);
                 $gl->post_review($review,$list_id,$entry_id);
             }
             else //if the game is not added before
