@@ -44,10 +44,8 @@
     {
             $gl= new GameList();
             $user_id=$_SESSION['gamelist_userid'];
-            $game_id=$_POST['delete'];
-            $list_id=$gl->check_userlist($user_id);
-            $entry_id=$gl->check_addinggames($game_id,$list_id);
-            $gl->delete_reviewlist($list_id,$entry_id,$review);
+            $review_id=$_POST['delete'];
+            $gl->delete_reviewlist($review_id);
     }
 
 ?>
@@ -373,7 +371,7 @@
                         echo '<div style="float: right">';
                         echo '<form method="post">';
                         echo '<button name="delete" value="';
-                        echo $value['game_id']; 
+                        echo $value['review_id']; 
                         echo '" style="float: right; background-color: transparent; border: none">';
                         echo '<div class="icon-trash" style="float: left">';
                         echo '<div class="trash-lid" style="background-color: #cf142b"></div>';
