@@ -257,7 +257,7 @@
         }
         public function extract_all_games($list_id)
         {
-            $query= "select game_list.list_id,game_list.entry_id,games.game_id,name,genre,release_date,images from ((game_list inner join addinggames on game_list.list_id=addinggames.list_id and game_list.entry_id=addinggames.entry_id) inner join games on addinggames.game_id=games.game_id) where game_list.list_id='$list_id'";
+            $query= "select game_list.list_id,game_list.entry_id,games.game_id,name,genre,release_date,images from ((game_list inner join addinggames on game_list.list_id=addinggames.list_id and game_list.entry_id=addinggames.entry_id) inner join games on addinggames.game_id=games.game_id) where game_list.list_id='$list_id' and game_list.flag_allgames=1";
             $DB= new Database();
             $result= $DB->read($query);
             return $result;
@@ -318,7 +318,7 @@
 
         public function extract_reviews($list_id)
         {
-            $query="select game_list.list_id,game_list.entry_id,game_list.rating,games.game_id,review,games.name,games.images,games.genre from (((game_list inner join addinggames on game_list.list_id=addinggames.list_id and game_list.entry_id=addinggames.entry_id) inner join games on addinggames.game_id=games.game_id) inner join reviews on game_list.list_id=reviews.list_id and game_list.entry_id=reviews.entry_id) where game_list.list_id='$list_id'";
+            $query="select game_list.list_id,game_list.entry_id,game_list.rating,games.game_id,review,review_id,games.name,games.images,games.genre from (((game_list inner join addinggames on game_list.list_id=addinggames.list_id and game_list.entry_id=addinggames.entry_id) inner join games on addinggames.game_id=games.game_id) inner join reviews on game_list.list_id=reviews.list_id and game_list.entry_id=reviews.entry_id) where game_list.list_id='$list_id'";
             $DB= new Database();
             $result=$DB->read($query);
             return $result;
@@ -388,12 +388,12 @@
             }
         }
 
-        // public delete_reviewlist($list_id,$entry_id,$review)
-        // {
-        //         $query="delete from reviews where list_id='$list_id' and entry_id='$entry_id' and review='$review'";
-        //         $DB= new Database();
-        //         $DB->save($query);
-        // }
+        public function delete_reviewlist($review_id)
+        {
+                $query="delete from reviews where review_id='$review_id'";
+                $DB= new Database();
+                $DB->save($query);
+        }
 
         private function check_review_flag($list_id,$entry_id)
         {
