@@ -371,6 +371,23 @@
             }
         }
 
+        public function get_individual_rating($list_id,$entry_id)
+        {
+            $query="select rating from game_list where list_id='$list_id' and entry_id='$entry_id' and rating!=0";
+            $DB= new Database();
+            $result=$DB->read($query);
+            if ($result)
+            {
+                $row=$result[0];
+                $rating=$row['rating'];
+                return $rating;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         // public delete_reviewlist($list_id,$entry_id,$review)
         // {
         //         $query="delete from reviews where list_id='$list_id' and entry_id='$entry_id' and review='$review'";
