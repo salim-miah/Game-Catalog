@@ -53,7 +53,8 @@
         }
         else
         {
-            $result=$gl->check_addinggames($game_id,$list_id);
+
+            $result=$gl->check_addinggames($game_id, $list_id);
             if ($result!=false)
             {
                 $entry_id=$result;
@@ -249,7 +250,16 @@
                 $result=$details->view_game_details($game_id);
                 $game_details=$result[0];
                 $result1 = $details->view_game_platforms($game_id);
-                $platforms = $result1;   
+                $platforms = $result1;
+                $gameid = $game_details["game_id"];   #For getting ratings
+                $result2 = $details->get_rating($gameid);
+                $rating = '-';
+                if ($result2 != false)
+                {
+                    $row = $result2[0];
+                    $rating = $row['ratings'];
+                    $rating = round($rating,2);
+                }  
                 echo '<img id="game_image" src="';
                 echo $game_details['images']; 
                 echo '"alt="Game Picture">';
@@ -276,6 +286,9 @@
                 }
                 echo $platforms[$y+1]['platform'];
                 echo " <br>";
+                echo "Rating: ";
+                echo $rating;
+
             ?>
         </div>
     </div>

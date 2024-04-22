@@ -164,7 +164,7 @@
                 $serial_number=1;
                 foreach ($game_data as $key=>$value)
                 {
-                    $gameid = $value["game_id"];
+                    $gameid = $value["game_id"];   #For getting ratings
                     $result = $games->get_rating($gameid);
                     $rating = '-';
                     if ($result != false)

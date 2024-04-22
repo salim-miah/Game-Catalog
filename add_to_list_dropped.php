@@ -300,6 +300,8 @@
                 $game_id=$_SESSION['game_id'];
                 $result=$details->view_game_details($game_id);
                 $game_details=$result[0];
+                $result1 = $details->view_game_platforms($game_id);
+                $platforms = $result1;
                 echo '<img id="game_image" src="';
                 echo $game_details['images']; 
                 echo '"alt="Game Picture">';
@@ -325,7 +327,8 @@
     <div id="details">
         <div>
             <span style="text-decoration: underline; padding-bottom: 5px;">Sypnosis</span><br>
-            Cyberpunk 2077 is an open-world, action-adventure RPG set in Night City, a megalopolis obsessed with power, glamour, and body modification. Play as V, a cyberpunk mercenary, and take on the most powerful forces of the city in a fight for glory and survival.
+            <?php echo $game_details["synopsis"];
+            ?>
         </div>
     </div>
     <br>
