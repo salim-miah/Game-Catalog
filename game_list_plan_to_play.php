@@ -6,6 +6,7 @@
     include("classes/user.php");
     include("classes/view_details.php");
     include("classes/gamelist.php");
+    include("classes/games.php");
     $name="";
 
     //Check if user is logged in

@@ -6,6 +6,7 @@
     include("classes/user.php");
     include("classes/view_details.php");
     include("classes/gamelist.php");
+    include("classes/games.php");
 
     $name="";
 
@@ -379,6 +380,7 @@
             <?php
 
                 $gl = new GameList();
+                $games = new Games();
                 $list_id = $gl->check_userlist($id);
                 $result=$gl->extract_currently_playing($list_id);
                 if ($result==true)
@@ -386,6 +388,15 @@
                     $serial_number=1;
                     foreach ($result as $key=>$value)
                     {
+                        $gameid = $value["game_id"];   #For getting ratings
+                        $result = $games->get_rating($gameid);
+                        $rating = '-';
+                        if ($result != false)
+                        {
+                            $row = $result[0];
+                            $rating = $row['ratings'];
+                            $rating = round($rating,2);
+                        }
                         echo '<div class="game-bar">';
                         echo '<div class="serial-number">';
                         echo $serial_number;
@@ -419,6 +430,7 @@
                         echo $value['genre'];
                         echo '<br>';
                         echo 'Rating: ';
+                        echo $rating;
                         echo '</div>';
                         echo '</div>';
                         echo '</div>';
