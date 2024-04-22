@@ -329,7 +329,7 @@
             $result=$this->check_review_flag($list_id,$entry_id);
             if ($result)
             {
-                $query="update game_list set $status=0 where list_id='$list_id' and entry_id='$entry_id'";
+                $query="update game_list set $status=0, flag_allgames=0 where list_id='$list_id' and entry_id='$entry_id'";
                 $DB= new Database();
                 $DB->save($query);
             }
