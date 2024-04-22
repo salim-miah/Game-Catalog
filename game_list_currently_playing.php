@@ -386,7 +386,6 @@
             <?php
 
                 $gl = new GameList();
-                $games = new Games();
                 $list_id = $gl->check_userlist($id);
                 $result=$gl->extract_currently_playing($list_id);
                 if ($result==true)
@@ -395,13 +394,12 @@
                     foreach ($result as $key=>$value)
                     {
                         $gameid = $value["game_id"];   #For getting ratings
-                        $result = $games->get_rating($gameid);
+                        $entryid = $gl->check_addinggames($gameid,$list_id);
+                        $result = $gl->get_individual_rating($list_id,$entryid);
                         $rating = '-';
                         if ($result != false)
                         {
-                            $row = $result[0];
-                            $rating = $row['ratings'];
-                            $rating = round($rating,2);
+                            $rating = round($result,2);
                         }
                         echo '<div class="game-bar">';
                         echo '<div class="serial-number">';
