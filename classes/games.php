@@ -64,12 +64,22 @@
 
         public function extract_games_by_rating()
         {
-            $query = "select * from games order by rating ASC";
+            $query = "SELECT * FROM games
+            LEFT JOIN 
+            (SELECT addinggames.game_id as g_id, AVG(game_list.rating) as avg_rating 
+            FROM addinggames 
+            INNER JOIN game_list
+            ON addinggames.list_id = game_list.list_id AND addinggames.entry_id = game_list.entry_id
+            WHERE game_list.rating != 0
+            GROUP BY addinggames.game_id) AS table1
+            ON games.game_id = table1.g_id
+            ORDER BY avg_rating DESC;";
             $g = new Database();
             $result=$g->read($query);
             return $result;
 
         }
+        
     }
 
 ?>
