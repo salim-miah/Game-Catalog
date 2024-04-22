@@ -58,7 +58,6 @@
             if ($result!=false)
             {
                 $entry_id=$result;
-                $query="update game_list set flag_review=1, flag_allgames=1 where list_id='$list_id' and entry_id='$entry_id'";
                 $DB = new Database();
                 $DB->save($query);
                 $gl->post_review($review,$list_id,$entry_id);
