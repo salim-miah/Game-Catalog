@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Delete User | GameList</title>
+</head>
+
+<style type="text/css">
+
+    body {
+        font-family: georgia;
+        background-image: url('admin_cover.jpg'); 
+        background-size: cover; 
+        background-repeat: no-repeat; 
+    }
+
+    #top_bar{
+        height: 50px;
+        background: linear-gradient(to right, #000000, #52525200); 
+        color: #ffffff;
+    }
+
+    #homepage {
+        float: right;
+        font-size: 15px;
+        margin-top: 15px;
+        margin-right: 10px;
+    }
+
+    #homepage a {
+            text-decoration: none;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #6626267d;
+    }
+
+    #homepage a:hover {
+        background-color: #662626d2;  
+    }
+
+    #logout a{
+        float: right; 
+        margin: 12px; 
+        text-decoration: none; 
+        color: #fff; 
+        padding: 3px 10px; 
+        border-radius: 5px; 
+        background-color: #6626267d;
+
+    }
+
+    #logout a:hover {
+        background-color: #662626d2;  
+    }
+
+    #second_bar{
+        height: 50px;
+        background: linear-gradient(to right, #000000, #52525200);
+        color: #ffffff;
+        font-size: 30px;
+        margin-top: 25px; 
+    }
+
+    #admin_info{
+        width: 900px;
+        background: linear-gradient(to right, #000000, #52525200);
+        color: #ffffff;
+        font-size: 25px;
+        margin: auto;
+        margin-top: 25px;
+        padding-left: 5px;
+    }
+
+    #action_bar{
+        height: 150px;
+        width: 900px;
+        background: linear-gradient(to right, #000000, #52525200);
+        font-size: 25px;
+        color: #ffffff;
+        margin: auto;
+        margin-top: 25px; 
+    }
+
+    #sure{
+        float: left;
+        font-size: 25px;
+        margin-left: 350px;
+        text-decoration: none;
+        text-align: center;
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: #6626267d;
+    }
+
+    #sure:hover {
+        background-color: #662626d2;  
+
+    }
+
+    .input-box {
+        width: 300px;
+        height: 30px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        background-color: #ffe3e3;
+    }
+
+
+</style>
+
+
+<body>
+    <div id="top_bar">
+            <div style="float: left;font-size: 30px; margin: 8px;">
+                GameList
+            </div>
+            <div style="float: right;font-size: 20px;margin: 10px;">
+                <div>Logged in as, (name) </div> 
+            </div>
+            <div id="homepage"><a href="homepage.php">Go to homepage</a></div>
+            <div id="logout"><a href="logout.php">Logout</a></div>
+    </div>
+    <div id="second_bar" style="width: 900px; margin: auto;">
+        Delete User
+    </div>
+    <div id="admin_info">
+        <div>
+            User ID:  <input type="text" name="game_id" class="input-box"><br>
+            
+        </div>
+    </div>
+
+    <div id="action_bar">
+        <div>
+            Are you sure about deleting this User's profile?<br><br>
+            <div>
+                <div id="sure"><a href="admin_homepage.html" style="color: #ffffff; text-decoration: none;">Sure</a></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
