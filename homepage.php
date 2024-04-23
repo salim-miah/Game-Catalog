@@ -89,6 +89,18 @@
             background: linear-gradient(to right, #000000, #52525200); 
             color: #ffffff;
         }
+
+        #searchsubmit{
+            height: 30px;
+            width:30px; 
+            background-color: #7da0ca7d; 
+            border: none; 
+            padding: 5px;
+        }
+        
+        #searchsubmit:hover {
+            background-color: #7da0cad9;
+        }
         .game-bar {
             display: flex;
             align-items: center;
@@ -145,6 +157,18 @@
             <a href="logout.php" style="float: right; margin: 12px; text-decoration: none; color: #fff; padding: 3px 10px; border-radius: 5px; background-color: #7da0ca7d;">
                 <span>Logout</span>
             </a>
+            <form method="post">
+                <span style="float: right;  margin-top: 10px; margin-right: 10px;">
+                    <button name="searchsubmit" id="searchsubmit">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                        </svg>
+                    </button>
+                </span>
+                <div class="searchbox" style="float: right; margin-top: 10px;">
+                    <input type="search" name="search" placeholder="Search for users" style="background-color: transparent; border: solid #7da0ca7d 2px; border-width: thin; height: 30px; width: 500px">
+                </div>
+            </form>
         </div>
             
         <div style="width: 900px; margin: auto; background-color: black; height: 350px;">
