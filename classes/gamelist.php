@@ -38,9 +38,9 @@
 
         public function post_review($review,$list_id,$entry_id)
         {
-            $query="insert into reviews(list_id,entry_id,review) values ('$list_id','$entry_id','$review')";
+            $query1="insert into reviews(list_id,entry_id,review) values ('$list_id','$entry_id','$review')";
             $DB= new Database();
-            $postreview=$DB->save($query);
+            $DB->save($query1);
         }
 
         public function create_new_game_list($user_id,$game_id,$status) //For users who have list_id valued NULL
