@@ -79,6 +79,18 @@
             return $result;
 
         }
+        public function extract_currently_playing( $game_id )
+        {
+            $query = "select count(games.game_id) as count from games
+            INNER JOIN addinggames
+            ON games.game_id = addinggames.game_id
+            INNER JOIN game_list
+            ON game_list.list_id = addinggames.list_id and addinggames.entry_id = game_list.entry_id
+            where games.game_id = '$game_id' and game_list.flag_currentlyplaying = 1;";
+            $g = new Database();
+            $result=$g->read($query);
+            return $result;
+        }
         
     }
 

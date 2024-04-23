@@ -35,7 +35,7 @@
         die;
     }
     if($_SERVER['REQUEST_METHOD']=="POST")
-    {   print_r($_POST);
+    {
         $gl= new GameList();
         $user_id=$_SESSION['gamelist_userid'];
         $game_id=$_SESSION['game_id'];

@@ -173,6 +173,9 @@
                         $rating = $row['ratings'];
                         $rating = round($rating,2);
                     }
+                    $result1 = $games->extract_currently_playing($gameid);
+                    $row = $result1[0];
+                    $active_players = $row['count'];
 
                     echo '<div class="game-bar">';
                     echo '<div class="serial-number">';
@@ -196,6 +199,9 @@
                     echo '<br>';
                     echo 'Rating: ';
                     echo $rating;
+                    echo '<br>';
+                    echo 'Active Players: ';
+                    echo $active_players;
                     echo '</div>';
                     echo '</div>';
                     echo '</div>';
