@@ -1,3 +1,64 @@
+<?php
+    
+    session_start();
+    include("classes/connect.php");
+    include("admin_classes/adminlogin.php");
+    include("classes/user.php");
+    include("classes/view_details.php");
+    include("admin_classes/Adminstrator.php");
+    include("admin_classes/adminfeatures.php");
+
+    $name="";
+
+    //Check if admin is logged in
+    if(isset($_SESSION['gamelist_adminid']) & is_numeric( $_SESSION['gamelist_adminid'] ))
+    {
+        $id = $_SESSION['gamelist_adminid'];
+        $login = new adminLogin();
+        $result = $login->check_admin_login($id);
+
+        if($result == true)
+        {
+            //Retrive user data
+            $adminstrator= new Adminstrator();
+            $data=$adminstrator->admin_data($id);
+            $admin_name =$data['admin_firstname']." ".$data['admin_lastname'];
+            $admin_id =  $data['admin_id'];
+            $admin_email = $data['admin_email'];
+            
+        }
+        else
+        {
+            header("Location: admin_login.php");
+            die;
+        }
+    }
+    else
+    {
+        header("Location: admin_login.php");
+        die;
+    } 
+
+    //To use session
+    // if($_SERVER['REQUEST_METHOD']=="POST")
+    // {
+    //     $game_id="";
+    //     foreach ($_POST as $key=>$value)
+    //     {
+    //         $game_id=$key;
+    //     }
+
+    //     $viewdetails= new ViewDetails();
+    //     $viewdetails->create_session($game_id);
+    // }
+?>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -118,11 +179,10 @@
                 GameList
             </div>
             <div style="float: right;font-size: 20px;margin: 10px;">
-                <div>Logged in as, (name) </div> 
+                <div>Logged in as, <?php echo $admin_name ?> </div> 
             </div>
-            <div id="homepage"><a href="homepage.php">Go to homepage</a></div>
             <div id="logout">
-            <a href="logout.php">Logout</a>
+            <a href="admin_logout.php">Logout</a>
             </div>
     </div>
     <div id="second_bar" style="width: 900px; margin: auto;">
@@ -130,9 +190,12 @@
     </div>
     <div id="admin_info">
         <div>
-            Admin ID:  <br><br>
-            Admin Name:  <br><br>
-            Admin Email:  <br><br>
+            Admin ID:    
+            <?php echo $admin_id; ?> <br><br>
+            Admin Name:  
+            <?php echo $admin_name; ?><br><br>
+            Admin Email:  
+            <?php echo $admin_email; ?><br><br>
             
         </div>
     </div>
@@ -140,8 +203,8 @@
     <div id="action_bar">
         <div>
             Actions<br><br>
-            <div id="add_games"><a href="add_games.html" style="color: #ffffff; text-decoration: none;">Add Games</a></div>
-            <div id="delete_user"><a href="delete_user.html" style="color: #ffffff; text-decoration: none;">Delete User</a></div>
+            <div id="add_games"><a href="add_games.php" style="color: #ffffff; text-decoration: none;">Add Games</a></div>
+            <div id="delete_user"><a href="delete_user.php" style="color: #ffffff; text-decoration: none;">Delete User</a></div>
         </div>
     </div>
 </body>
