@@ -1,3 +1,81 @@
+<?php
+    
+    session_start();
+    include("classes/connect.php");
+    include("admin_classes/adminlogin.php");
+    include("classes/user.php");
+    include("classes/view_details.php");
+    include("admin_classes/Adminstrator.php");
+    include("admin_classes/adminfeatures.php");
+
+    $name="";
+
+    //Check if admin is logged in
+    if(isset($_SESSION['gamelist_adminid']) & is_numeric( $_SESSION['gamelist_adminid'] ))
+    {
+        $id = $_SESSION['gamelist_adminid'];
+        $login = new adminLogin();
+        $result = $login->check_admin_login($id);
+
+        if($result == true)
+        {
+            //Retrive user data
+            $adminstrator= new Adminstrator();
+            $data=$adminstrator->admin_data($id);
+            $admin_name =$data['admin_firstname']." ".$data['admin_lastname'];
+            $admin_id =  $data['admin_id'];
+            $admin_email = $data['admin_email'];
+            
+        }
+        else
+        {
+            header("Location: admin_login.php");
+            die;
+        }
+    }
+    else
+    {
+        header("Location: admin_login.php");
+        die;
+    }
+    
+    // To add games
+    if($_SERVER['REQUEST_METHOD']=="POST")
+    {
+        print_r($_POST);
+        $ag= new AdminFeatures();
+        $admin_id=$_SESSION['gamelist_adminid'];
+        $game_name = $_POST['game_name'];
+        $game_genre = $_POST['game_genre'];
+        $game_date = $_POST['release_date'];
+        $game_dev = $_POST['developer'];
+        $game_plat = $_POST['platforms'];
+        $game_synop = $_POST['synopsis'];
+        $game_im = $_POST['game_image'];
+        $check1 = $ag->check_game($game_name);
+            if ($check1!=false)
+            {
+                echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
+                echo "The following errors occured<br><br>";
+                echo $check1;
+                echo "</div>";
+            }
+            else
+            {
+                $ag->add_game($game_name,$game_genre,$game_date,$game_dev,$game_plat,$game_synop,$game_image);
+                echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
+                echo "The Game is added!";
+                echo "</div>"; 
+            }
+            }
+
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,11 +162,13 @@
     #done{
         float: left;
         font-size: 25px;
+        color: #ffffff;
         margin-left: 350px;
         text-decoration: none;
         text-align: center;
         padding: 5px 10px;
         border-radius: 5px;
+
         background-color: #6626267d;
     }
 
@@ -114,34 +194,39 @@
                 GameList
             </div>
             <div style="float: right;font-size: 20px;margin: 10px;">
-                <div>Logged in as, (name) </div> 
+                <div>Logged in as, <?php echo $admin_name ?> </div> 
             </div>
-            <div id="homepage"><a href="homepage.php">Go to homepage</a></div>
-            <div id="logout"><a href="logout.php">Logout</a></div>
+            <div id="homepage"><a href="admin_homepage.php">Go to homepage</a></div>
+            <div id="logout"><a href="admin_logout.php">Logout</a></div>
     </div>
     <div id="second_bar" style="width: 900px; margin: auto;">
         Add Games
     </div>
-    <div id="admin_info">
+    <form method="post">
+    <div id="admin_info">   
         <div>
-            Game ID:  <input type="text" name="game_id" class="input-box"><br>
             Game Name:  <input type="text" name="game_name" class="input-box"><br>
-            Release Date:  <input type="text" name="release_date" class="input-box"><br>
+            Genre: <input type="text" name="Genre" class="input-box"><br>
+            Release Date:  <input type="date" name="release_date" class="input-box"><br>
             Developer: <input type="text" name="developer" class="input-box"><br>
             Platforms: <input type="text" name="platforms" class="input-box"><br>
             Synopsis: <input type="text" name="synopsis" class="input-box"><br>
             Game Image: <input type="file" name="game_image" class="input-box"><br>
             <span style="font-size: 14px;">(Image size should be 80px x 80px)</span> 
-
         </div>
-    </div>
-
-    <div id="action_bar">
-        <div>
-            <div id="done"><a href="admin_homepage.html" style="color: #ffffff; text-decoration: none;">Done</a></div>
+        <div id="action_bar">
+            <input type="submit" value="Add" name="add_game" id="done">
             <!--ei button e ki korbo not sure yet. you guys decide. I want it to be like Enter button. Like, after clicking this, data will be recorded.-->
         </div>
     </div>
+    </form>
+
+    <!-- <div id="action_bar">
+        <div>
+            <div id="done"><a style="color: #ffffff; text-decoration: none;">Done</a></div> -->
+            <!--ei button e ki korbo not sure yet. you guys decide. I want it to be like Enter button. Like, after clicking this, data will be recorded.-->
+        <!-- </div>
+    </div> -->
 </body>
 </html>
 

@@ -1,3 +1,45 @@
+<?php
+
+session_start();
+    
+    include("classes/connect.php");
+    include("admin_classes/adminlogin.php");
+
+    $email = "";
+    $password = "";
+
+
+    if($_SERVER['REQUEST_METHOD']=="POST")
+    {
+        $login = new adminLogin();
+        $result=$login->evaluate($_POST);
+        print_r($result);
+        if ($result!="")
+        {   
+            echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
+            echo "The following errors occured<br><br>";
+            echo $result;
+            echo "</div>";
+        }
+        else
+        {
+            //To redirect to homepage
+            header("Location: admin_homepage.php"); 
+            die;
+        }
+
+        $email = $_POST['admin_email'];
+        $password = $_POST['admin_password'];
+    }
+
+
+
+?>
+
+
+
+
+
 <!DOCTYPE HTML>
 
 <html lang="en">
