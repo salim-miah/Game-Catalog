@@ -50,6 +50,13 @@
 
 <style type="text/css">
 
+    body {
+        font-family: georgia;
+        background-image: url('profile.jpg'); 
+        background-size: cover; 
+        background-repeat: no-repeat; 
+    }
+
     #top_bar{
         height: 50px;
         background: linear-gradient(to right, #000000, #52525200); 
@@ -75,17 +82,32 @@
         background-color: #7da0cab2;  
     }
 
+    #logout a{
+        float: right; 
+        margin: 12px; 
+        text-decoration: none; 
+        color: #fff; 
+        padding: 3px 10px; 
+        border-radius: 5px; 
+        background-color: #7da0ca7d;;
+
+    }
+
+    #logout a:hover {
+        background-color: #7da0cab2;
+    }
+    
     #second_bar{
         height: 50px;
-        background: linear-gradient(to right, #052659, #367fa9); 
+        background: linear-gradient(to right, #0527595e, #367fa960); 
         color: #ffffff;
         font-size: 30px;
-        margin-top: 10px; /* Add margin-top to create space between the bars */
+        margin-top: 10px; 
     }
 
     #user_info{
         width: 900px;
-        background: linear-gradient(to right, #052659, #367fa9); 
+        background: linear-gradient(to right, #0527595e, #367fa960); 
         color: #ffffff;
         font-size: 25px;
         margin: auto;
@@ -96,7 +118,7 @@
     #playlist_bar{
         height: 50px;
         width: 900px;
-        background: linear-gradient(to right, #052659, #367fa9); 
+        background: linear-gradient(to right, #0527595e, #367fa960); 
         font-size: 30px;
         margin: auto;
         margin-top: 10px; 
@@ -104,7 +126,7 @@
 </style>
 
 
-<body style="font-family: georgia; background: linear-gradient(to right, #052659, #367fa9); ">
+<body>
     <div id="top_bar">
             <div style="float: left;font-size: 30px; margin: 8px;">
                 GameList
@@ -113,6 +135,7 @@
                 <div>Logged in as, <?php echo $name; ?></div>
             </div>
             <div id="homepage"><a href="homepage.php">Go to homepage</a></div>
+            <div id="logout"><a href="logout.php">Logout</a></div>
     </div>
     <div id="second_bar" style="width: 900px; margin: auto;">
         My Profile
