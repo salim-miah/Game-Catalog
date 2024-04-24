@@ -1,51 +1,7 @@
-<?php
-    
-    session_start();
-    include("classes/connect.php");
-    include("classes/login.php");
-    include("classes/user.php");
-    include("classes/view_details.php");
-
-    $name="";
-
-    //Check if user is logged in
-    if(isset($_SESSION['gamelist_userid']) & is_numeric( $_SESSION['gamelist_userid'] ))
-    {
-        $id = $_SESSION['gamelist_userid'];
-        $login = new Login();
-        $result = $login->check_login($id);
-
-        if($result == true)
-        {
-            //Retrive user data
-            $user= new User();
-            $data=$user->user_data($id);
-            $name.=$data['firstname']." ".$data['lastname'];
-            $user_id = $data['user_id'];
-            $bd = $data['dob'];
-            $email = $data['email'];
-            $firstname = $data['firstname'];
-            
-        }
-        else
-        {
-            header("Location: login.php");
-            die;
-        }
-    }
-    else
-    {
-        header("Location: login.php");
-        die;
-    }
-
-?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Profile | GameList</title>
+    <title>Friend Profile | GameList</title>
 </head>
 
 <style type="text/css">
@@ -62,6 +18,7 @@
         background: linear-gradient(to right, #000000, #52525200); 
         color: #ffffff;
     }
+
 
     #homepage {
         float: right;
@@ -89,14 +46,15 @@
         color: #fff; 
         padding: 3px 10px; 
         border-radius: 5px; 
-        background-color: #7da0ca7d;;
+        background-color: #7da0ca7d;
 
     }
 
     #logout a:hover {
-        background-color: #7da0cab2;
+        background-color: #7da0cab2; 
+
     }
-    
+
     #second_bar{
         height: 50px;
         background: linear-gradient(to right, #0527595e, #367fa960); 
@@ -132,28 +90,28 @@
                 GameList
             </div>
             <div style="float: right;font-size: 20px;margin: 10px;">
-                <div>Logged in as, <?php echo $name; ?></div>
+                <div>Logged in as, (name)</div>
             </div>
             <div id="homepage"><a href="homepage.php">Go to homepage</a></div>
             <div id="logout"><a href="logout.php">Logout</a></div>
     </div>
     <div id="second_bar" style="width: 900px; margin: auto;">
-        My Profile
+        Friend Profile
     </div>
     <div id="user_info">
         <div>
-            User ID: <?php echo $user_id; ?> <br><br>
-            Player Name: <?php echo $name; ?> <br><br>
-            Player Birthday: <?php echo $bd; ?> <br><br>
-            Player Email: <?php echo $email; ?> <br><br>
+            Friend ID:  <br><br>
+            Friend Name: <br><br>
+            Friend Birthday: <br><br>
+            Friend Email:  <br><br>
             
         </div>
     </div>
 
     <div id="playlist_bar">
         <div>
-            <a href="game_list_main.php" style="color: #ffffff;"><?php echo $firstname; ?>'s Game List</a>
+            <a href="game_list_main.php" style="color: #ffffff;">(name)'s Game List</a>
         </div>
     </div>
 </body>
-</html>
+</html> 
