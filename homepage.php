@@ -157,7 +157,7 @@
             <a href="logout.php" style="float: right; margin: 12px; text-decoration: none; color: #fff; padding: 3px 10px; border-radius: 5px; background-color: #7da0ca7d;">
                 <span>Logout</span>
             </a>
-            <form method="post">
+            <form method="get" action="searchedusers.php">
                 <span style="float: right;  margin-top: 10px; margin-right: 10px;">
                     <button name="searchsubmit" id="searchsubmit">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6">
@@ -166,7 +166,7 @@
                     </button>
                 </span>
                 <div class="searchbox" style="float: right; margin-top: 10px;">
-                    <input type="search" name="search" placeholder="Search for users" style="background-color: transparent; border: solid #7da0ca7d 2px; border-width: thin; height: 30px; width: 500px">
+                    <input type="search" name="search" placeholder="Search for users" style="background-color: transparent; color: white; border: solid #7da0ca7d 2px; border-width: thin; height: 30px; width: 500px">
                 </div>
             </form>
         </div>
