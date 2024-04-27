@@ -89,7 +89,7 @@
         color: #fff; 
         padding: 3px 10px; 
         border-radius: 5px; 
-        background-color: #7da0ca7d;;
+        background-color: #7da0ca7d;
 
     }
 
@@ -97,12 +97,62 @@
         background-color: #7da0cab2;
     }
     
+
+
+    #main_bar{
+        height: 350px;
+        color: #ffffff;
+        font-size: 30px;
+        margin-top: 10px; 
+        margin-left: 10px;
+        display: flex;
+    }
+
+    
+    #following_top{
+        width: 200px;
+        height: 50px;
+        float: left;
+        color: #fff; 
+        border-radius: 5px; 
+        background: linear-gradient(to right, #0527595e, #367fa960); 
+    }
+    
+    #following_list{
+        width: 200px;
+        height: 225px;
+        float: left;
+        color: #fff; 
+        border-radius: 5px; 
+        margin-top: 5px;
+        background: linear-gradient(to right, #0527595e, #367fa960); 
+    }
+
+    #follower_page{
+        width: 200px;
+        height: 50px;
+        float: left;
+        color: #fff; 
+        border-radius: 5px; 
+        margin-top: 5px;
+        background: linear-gradient(to right, #0527595e, #367fa960); 
+        font-size: 20px;
+        
+    }
+
+    #profile_container{
+        display: flex 0.5;
+        margin-right: 200px;
+    }
+
     #second_bar{
         height: 50px;
         background: linear-gradient(to right, #0527595e, #367fa960); 
         color: #ffffff;
         font-size: 30px;
-        margin-top: 10px; 
+        margin-left: 30px;
+        width: 900px; 
+        
     }
 
     #user_info{
@@ -113,6 +163,7 @@
         margin: auto;
         margin-top: 5px;
         padding-left: 5px;
+        margin-left: 30px;
     }
 
     #playlist_bar{
@@ -122,7 +173,10 @@
         font-size: 30px;
         margin: auto;
         margin-top: 10px; 
+        margin-left: 30px;
     }
+
+    
 </style>
 
 
@@ -137,22 +191,43 @@
             <div id="homepage"><a href="homepage.php">Go to homepage</a></div>
             <div id="logout"><a href="logout.php">Logout</a></div>
     </div>
-    <div id="second_bar" style="width: 900px; margin: auto;">
-        My Profile
-    </div>
-    <div id="user_info">
-        <div>
-            User ID: <?php echo $user_id; ?> <br><br>
-            Player Name: <?php echo $name; ?> <br><br>
-            Player Birthday: <?php echo $bd; ?> <br><br>
-            Player Email: <?php echo $email; ?> <br><br>
-            
-        </div>
-    </div>
 
-    <div id="playlist_bar">
+    <div id = main_bar>
+
         <div>
-            <a href="game_list_main.php" style="color: #ffffff;"><?php echo $firstname; ?>'s Game List</a>
+            <div id="following_top">
+                Following
+            </div>
+            <div id="following_list">
+                1. Pranto <br>
+                2. Salim <br>
+                3. Affshafee <br>
+
+            </div>
+            <div id="follower_page">
+
+                <a href="follower_list.html" style="color: #ffffff;">See More Following</a>
+
+            </div>
+        </div>
+
+        <div id="profile_container">
+
+            <div id="second_bar">
+                My Profile
+            </div>
+            <div id="user_info">
+                    User ID: <?php echo $user_id; ?> <br><br>
+                    Player Name: <?php echo $name; ?> <br><br>
+                    Player Birthday: <?php echo $bd; ?> <br><br>
+                    Player Email: <?php echo $email; ?> <br><br>
+
+            </div>
+
+            <div id="playlist_bar">
+                    <a href="game_list_main.php" style="color: #ffffff;"><?php echo $firstname; ?>'s Game List</a>
+                </div>
+            </div>
         </div>
     </div>
 </body>
