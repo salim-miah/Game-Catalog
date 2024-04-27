@@ -4,15 +4,19 @@ class AdminFeatures
 {
     public function add_game($name,$genre,$date,$dev,$hq,$synop,$image)
         {
+            $query1 = "select * from developers where developer_name = '$dev'";
             $query2 = "insert into developers (developer_name, headquarters) values 
             ('$dev', '$hq')";
             $synop=addslashes($synop);
             $query="insert into games(name, genre, release_date, developer, synopsis, images) values 
             ('$name','$genre','$date','$dev','$synop', '$image')";
             $DB = new Database();
-            $DB->save($query2);
+            $x = $DB->read($query1);
+            if ($x == false)
+            {
+                $DB->save($query2);
+            }
             $DB->save($query);
-
         }
 
     public function check_game($name)
