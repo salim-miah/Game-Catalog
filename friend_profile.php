@@ -59,6 +59,12 @@
 
     if($_SERVER['REQUEST_METHOD']=="POST")
     {
+        if (isset($_POST['gamelist']))
+        {
+            $_SESSION['gamelist_otheruserid']=$_POST['gamelist'];
+            header("Location: friend_gamelist_main.php");
+            die;
+        }
         $operation="";
         foreach ($_POST as $key=>$value)
         {
@@ -238,8 +244,16 @@
     </div>
 
     <div id="playlist_bar">
-        <div>
-            <a href="friend_gamelist_main.html" style="color: #ffffff;">(name)'s Game List</a>
+        <div style="margin-bottom: 10px;">
+            <form method="post">
+                <?php
+                    echo '<button name="gamelist" id="button" value="';
+                    echo $profile['user_id'];
+                    echo '" style="float: left;">';
+                    echo $profile['firstname'].'\'s ';
+                    echo 'Game List</button>';
+                ?>
+            </form>
         </div>
     </div>
 </body>
