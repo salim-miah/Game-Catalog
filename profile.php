@@ -110,7 +110,7 @@
 
     
     #following_top{
-        width: 200px;
+        width: 300px;
         height: 50px;
         float: left;
         color: #fff; 
@@ -119,8 +119,8 @@
     }
     
     #following_list{
-        width: 200px;
-        height: 225px;
+        width: 300px;
+        min-height: 225px;
         float: left;
         color: #fff; 
         border-radius: 5px; 
@@ -175,7 +175,45 @@
         margin-top: 10px; 
         margin-left: 30px;
     }
+    .game-bar {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #7da0ca7d;
+            margin-bottom: 10px;
+        }
 
+        .serial-number {
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 10px;
+            color: #fff;
+        }
+
+        .game-image {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+        }
+
+        .game-info {
+            flex-grow: 1;
+        }
+
+        .game-name {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .game-details {
+            color: blue;
+            text-decoration: none;
+        }
+
+        .game-details:hover {
+            text-decoration: underline;
+        }
     
 </style>
 
@@ -199,14 +237,38 @@
                 Following
             </div>
             <div id="following_list">
-                1. Pranto <br>
-                2. Salim <br>
-                3. Affshafee <br>
+                <?php
+                            $serial_number=1;
+                            $u=new User();
+                            $result=$u->retrieve_limited_following($_SESSION['gamelist_userid']);
+                            foreach ($result as $key=>$value)
+                            {
+                                echo '<div class="game-bar">';
+                                echo '<div class="serial-number">';
+                                echo $serial_number;
+                                echo '</div>';
+                                echo '<div class="game-info">';
+                                echo '<div class="game-name">Name: ';
+                                echo $value['firstname']." ".$value['lastname'];
+                                echo '<br>';
+                                echo 'User ID: ';
+                                echo $value['user_id'];
+                                echo '</div>';    
+                                echo '<form method="get" action="friend_profile.php">';
+                                echo '<input type="submit" value="View Profile" style="background-color: #7da0ca7d; color: #fff; padding: 5px 10px; border-radius: 5px; border: none;" name=';
+                                echo $value['user_id'];
+                                echo '>';
+                                echo '</form>';
+                                echo '</div>';
+                                echo '</div>';
+                                $serial_number++;
+                            }
+                ?>
 
             </div>
             <div id="follower_page">
 
-                <a href="follower_list.html" style="color: #ffffff;">See More Following</a>
+                <a href="following_list.php" style="color: #ffffff;">See More Following</a>
 
             </div>
         </div>
