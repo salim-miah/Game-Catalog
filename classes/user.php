@@ -41,6 +41,22 @@
                 return false;
             }
         }
+
+        public function retrieve_limited_following($id)
+        {
+            $query="select user.user_id,user.firstname,user.lastname from friends inner join user on friends.user_id2=user.user_id where user_id1='$id' limit 3";
+            $DB = new Database();
+            $result=$DB->read($query);
+            return $result;
+        }
+
+        public function retrieve_following($id)
+        {
+            $query="select user.user_id,user.firstname,user.lastname from friends inner join user on friends.user_id2=user.user_id where user_id1='$id'";
+            $DB = new Database();
+            $result=$DB->read($query);
+            return $result;
+        }
         // public function check_if_friends($id1,$id2)
         // {
         //     $query="(SELECT * FROM friends
