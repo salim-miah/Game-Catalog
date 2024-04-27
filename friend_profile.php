@@ -59,14 +59,25 @@
 
     if($_SERVER['REQUEST_METHOD']=="POST")
     {
+        $operation="";
         foreach ($_POST as $key=>$value)
         {
             $user_id=$key;
+            $operation=$value;
         }
-
-        $ob = new Follow();
-        $ob->follow($id,$user_id);
-        header("location:javascript://history.go(-1)");
+        if ($operation=="Follow")
+        {
+            $ob = new Follow();
+            $ob->follow($id,$user_id);
+            header("location:javascript://history.go(-1)");
+        }
+        else
+        {
+            $ob = new Follow();
+            $ob->unfollow($id,$user_id);
+            header("location:javascript://history.go(-1)");
+        }
+        
     }
 ?>
 
