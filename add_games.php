@@ -41,18 +41,25 @@
     
     // To add games
     if($_SERVER['REQUEST_METHOD']=="POST")
-    {
-        print_r($_POST);
+    {   
+        #print_r($_FILES);
         $ag= new AdminFeatures();
         $admin_id=$_SESSION['gamelist_adminid'];
         $game_name = $_POST['game_name'];
         $game_genre = $_POST['game_genre'];
         $game_date = $_POST['release_date'];
         $game_dev = $_POST['developer'];
+        $dev_hq = $_POST['hq'];
         $game_plat = $_POST['platforms'];
         $game_synop = $_POST['synopsis'];
-        $game_im = $_POST['game_image'];
+        #$game_im = $_FILES['game_image'];
         $check1 = $ag->check_game($game_name);
+        
+        $targetDir = "images/"; 
+        $fileName = basename($_FILES["game_image"]["name"]); 
+        $targetFilePath = $targetDir . $fileName; 
+        $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+
             if ($check1!=false)
             {
                 echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
@@ -62,7 +69,10 @@
             }
             else
             {
-                $ag->add_game($game_name,$game_genre,$game_date,$game_dev,$game_plat,$game_synop,$game_image);
+                move_uploaded_file($_FILES["game_image"]["tmp_name"], $targetFilePath);
+                #echo $targetFilePath;
+                #echo $fileName;
+                $ag->add_game($game_name,$game_genre,$game_date,$game_dev,$dev_hq,$game_plat,$game_synop,$targetFilePath);
                 echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
                 echo "The Game is added!";
                 echo "</div>"; 
@@ -202,16 +212,17 @@
     <div id="second_bar" style="width: 900px; margin: auto;">
         Add Games
     </div>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
     <div id="admin_info">   
         <div>
             Game Name:  <input type="text" name="game_name" class="input-box"><br>
-            Genre: <input type="text" name="Genre" class="input-box"><br>
+            Genre: <input type="text" name="game_genre" class="input-box"><br>
             Release Date:  <input type="date" name="release_date" class="input-box"><br>
             Developer: <input type="text" name="developer" class="input-box"><br>
+            Developer's Headquarter: <input type="text" name="hq" class="input-box"><br>
             Platforms: <input type="text" name="platforms" class="input-box"><br>
             Synopsis: <input type="text" name="synopsis" class="input-box"><br>
-            Game Image: <input type="file" name="game_image" class="input-box"><br>
+            Game Image: <input type="file" name="game_image" id="game_image" class="input-box"><br>
             <span style="font-size: 14px;">(Image size should be 80px x 80px)</span> 
         </div>
         <div id="action_bar">
