@@ -41,43 +41,47 @@
     
     // To add games
     if($_SERVER['REQUEST_METHOD']=="POST")
-    {   
-        #print_r($_FILES);
-        $ag= new AdminFeatures();
-        $admin_id=$_SESSION['gamelist_adminid'];
-        $game_name = $_POST['game_name'];
-        $game_genre = $_POST['game_genre'];
-        $game_date = $_POST['release_date'];
-        $game_dev = $_POST['developer'];
-        $dev_hq = $_POST['hq'];
-        $game_plat = $_POST['platforms'];
-        $game_synop = $_POST['synopsis'];
-        #$game_im = $_FILES['game_image'];
-        $check1 = $ag->check_game($game_name);
-        
-        $targetDir = "images/"; 
-        $fileName = basename($_FILES["game_image"]["name"]); 
-        $targetFilePath = $targetDir . $fileName; 
-        $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+    { 
+            $ag= new AdminFeatures();
+            $admin_id=$_SESSION['gamelist_adminid'];
+            $game_name = $_POST['game_name'];
+            $game_genre = $_POST['game_genre'];
+            $game_date = $_POST['release_date'];
+            $game_dev = $_POST['developer'];
+            $dev_hq = $_POST['hq'];
+            // $game_plat = $_POST['platforms'];
+            //To store platforms into database
+            $game_synop = $_POST['synopsis'];
+            #$game_im = $_FILES['game_image'];
+            $check1 = $ag->check_game($game_name); 
+            $targetDir = "images/"; 
+            $fileName = basename($_FILES["game_image"]["name"]); 
+            $targetFilePath = $targetDir . $fileName; 
+            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 
-            if ($check1!=false)
-            {
-                echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
-                echo "The following errors occured<br><br>";
-                echo $check1;
-                echo "</div>";
-            }
-            else
-            {
-                move_uploaded_file($_FILES["game_image"]["tmp_name"], $targetFilePath);
-                #echo $targetFilePath;
-                #echo $fileName;
-                $ag->add_game($game_name,$game_genre,$game_date,$game_dev,$dev_hq,$game_plat,$game_synop,$targetFilePath);
-                echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
-                echo "The Game is added!";
-                echo "</div>"; 
-            }
-            }
+                if ($check1!=false)
+                {
+                    echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
+                    echo "The following errors occured<br><br>";
+                    echo $check1;
+                    echo "</div>";
+                }
+                else
+                {
+                    move_uploaded_file($_FILES["game_image"]["tmp_name"], $targetFilePath);
+                    #echo $targetFilePath;
+                    #echo $fileName;
+                    $ag->add_game($game_name,$game_genre,$game_date,$game_dev,$dev_hq,$game_synop,$targetFilePath);
+                    $game_id=$ag->retrieve_gameid($game_name,$game_date,$game_synop);
+                    foreach($_POST['platform'] as $key => $value)
+                    {
+                        $ag->add_platform($game_id,$value);
+                    }
+                    echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
+                    echo "The Game is added!";
+                    echo "</div>"; 
+                } 
+    }
 
 
 
@@ -212,7 +216,7 @@
     <div id="second_bar" style="width: 900px; margin: auto;">
         Add Games
     </div>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" id="game_info">
     <div id="admin_info">   
         <div>
             Game Name:  <input type="text" name="game_name" class="input-box"><br>
@@ -220,7 +224,9 @@
             Release Date:  <input type="date" name="release_date" class="input-box"><br>
             Developer: <input type="text" name="developer" class="input-box"><br>
             Developer's Headquarter: <input type="text" name="hq" class="input-box"><br>
-            Platforms: <input type="text" name="platforms" class="input-box"><br>
+            <div id="platform_field">
+                Platforms: <input type="text" name="platform[]" class="input-box" placeholder="Add Platform">&nbsp;<button name="addplatform" class="add_platform_button">Add Platform</a></button><br>
+            </div>
             Synopsis: <input type="text" name="synopsis" class="input-box"><br>
             Game Image: <input type="file" name="game_image" id="game_image" class="input-box"><br>
             <span style="font-size: 14px;">(Image size should be 80px x 80px)</span> 
@@ -231,7 +237,20 @@
         </div>
     </div>
     </form>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".add_platform_button").click(function(e) {
+                e.preventDefault();
+                $("#platform_field").prepend('<div id="platform_field"> Platforms: <input type="text" name="platform[]" class="input-box" placeholder="Add Platform">&nbsp;<button name="addplatform" class="remove_platform_button">Remove</a></button><br></div>');
+            });
+            $(document).on('click','.remove_platform_button', function(e){
+                e.preventDefault();
+                let row_item = $(this).parent();
+                $(row_item).remove();
+            });
+        });
+    </script>
     <!-- <div id="action_bar">
         <div>
             <div id="done"><a style="color: #ffffff; text-decoration: none;">Done</a></div> -->
