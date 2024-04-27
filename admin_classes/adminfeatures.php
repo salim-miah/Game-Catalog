@@ -63,9 +63,23 @@ class AdminFeatures
     }
     public function delete_user($id)
     {
-        $query= "delete from user where user_id = '$id' ";
         $DB = new Database();
+        $q1 = "SELECT list_id FROM user WHERE user_id = '$id'";
+        $r1 = $DB->read($q1);
+        $row = $r1[0];
+        $l1 = $row["list_id"];
+        $query= "delete from user where user_id = '$id' ";
+        $d1 = "DELETE FROM addinggames WHERE list_id = '$l1' ";
+        $d2 = "DELETE FROM reviews WHERE list_id = '$l1'";
+        $d3 = "DELETE FROM game_list WHERE list_id = '$l1'";
+        $d4 = "DELETE FROM Friends WHERE user_id1 = '$id'";
+        $d5 = "DELETE FROM Friends WHERE user_id2 = '$id' ";
+        $DB->save($d4);
+        $DB->save($d5);
         $DB->save($query);
+        $DB->save($d1);
+        $DB->save($d2);
+        $DB->save($d3);
     }
 
 
