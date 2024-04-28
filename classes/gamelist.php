@@ -335,11 +335,15 @@
             }
             else{
                 $query1="delete from addinggames where list_id='$list_id' and entry_id='$entry_id'";
-                $query2="delete from game_list where list_id='$list_id' and entry_id='$entry_id'";
+                $query2="SET GLOBAL FOREIGN_KEY_CHECKS=0";
+                $query3="delete from game_list where list_id='$list_id' and entry_id='$entry_id'";
+                $query4="SET GLOBAL FOREIGN_KEY_CHECKS=1";
                 $DB= new Database();
                 $DB->save($query1);
+                $DB->save($query2);
                 try {
-                    $DB->save($query2);
+                    $DB->save($query3);
+                    $DB->save($query4);
                 }
                 catch(Exception $e) {
                     if ($status=="flag_currentlyplaying")
@@ -390,11 +394,32 @@
 
         public function delete_reviewlist($review_id)
         {
-                $query="delete from reviews where review_id='$review_id'";
+                $query1="select * from reviews inner join game_list on reviews.list_id=game_list.list_id and reviews.entry_id=game_list.entry_id where review_id='$review_id'";
                 $DB= new Database();
-                $DB->save($query);
+                $result=$DB->read($query1);
+                $row=$result[0];
+                $list_id=$row['list_id'];
+                $entry_id=$row['entry_id'];
+                $flag_allgames=$row['flag_allgames'];
+                if ($flag_allgames==1)
+                {
+                    $query="delete from reviews where review_id='$review_id'";                
+                    $DB->save($query);
+                }
+                else
+                {
+                    $query="delete from reviews where review_id='$review_id'"; 
+                    $query0="delete from addinggames where list_id='$list_id' and entry_id='$entry_id'";
+                    $query2="SET GLOBAL FOREIGN_KEY_CHECKS=0";
+                    $query3="delete from game_list where list_id='$list_id' and entry_id='$entry_id'";
+                    $query4="SET GLOBAL FOREIGN_KEY_CHECKS=1";
+                    $DB->save($query);
+                    $DB->save($query0);
+                    $DB->save($query2);
+                    $DB->save($query3);
+                    $DB->save($query4);
+                }            
         }
-
         private function check_review_flag($list_id,$entry_id)
         {
             $query="select flag_review from game_list where list_id='$list_id' and entry_id='$entry_id'";
