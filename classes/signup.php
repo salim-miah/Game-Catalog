@@ -18,6 +18,15 @@ class Signup
                 {
                     $this->error.="Invalid email address!<br>";
                 }
+                else{
+                    $query="select * from user where email='$value'";
+                    $DB= new Database();
+                    $result=$DB->read($query);
+                    if ($result)
+                    {
+                        $this->error.="Email Address already exists!<br>";
+                    }
+                }
             }
             if($key=='firstname')
             {
