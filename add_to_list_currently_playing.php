@@ -33,40 +33,57 @@
     {
         header("Location: login.php");
         die;
-    } 
+    }
     if($_SERVER['REQUEST_METHOD']=="POST")
     {
         $gl= new GameList();
         $user_id=$_SESSION['gamelist_userid'];
         $game_id=$_SESSION['game_id'];
-        $status='currentlyplaying';
+        $rating=false;
+        $status='completed';
         $list_id=$gl->check_userlist($user_id);
         $entry_id="";
-        if ($list_id==NULL)
+        if (!isset($_POST['rate']))
         {
-            $id=$gl->create_new_game_list($user_id,$game_id,$status);
-            $list_id=$id[0];
-            $entry_id=$id[1];
+            echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
+            echo "Please rate the game";
+            echo "</div>";    
         }
         else
         {
-            $result=$gl->check_addinggames($game_id,$list_id);
-            if ($result!=false)
+            $rating=$_POST['rate'];
+            if ($list_id==NULL)
             {
-                $entry_id=$result;
-                $bool=$gl->check_flag($status,$list_id,$entry_id);
-                if ($bool==true)
+                $id=$gl->create_new_game_list($user_id,$game_id,$status);
+                $list_id=$id[0];
+                $entry_id=$id[1];
+                $gl->rate($list_id,$entry_id,$rating);
+            }
+            else
+            {
+                $result=$gl->check_addinggames($game_id,$list_id);
+                if ($result!=false)
                 {
-                    echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
-                    echo "The following errors occured<br><br>";
-                    echo "The Game already exists in the list";
-                    echo "</div>";
+                    $entry_id=$result;
+                    $bool=$gl->check_flag($status,$list_id,$entry_id);
+                    if ($bool==true)
+                    {
+                        echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
+                        echo "The following errors occured<br><br>";
+                        echo "The Game already exists in the list";
+                        echo "</div>";
+                    }
+                    else
+                    {
+                        $gl->rate($list_id,$entry_id,$rating);
+                    }
                 }
-            }
-            else //if the game is not added before
-            {
-                $entry_id=$gl->create_existing_game_list($list_id,$game_id,$status);
-            }
+                else //if the game is not added before
+                {
+                    $entry_id=$gl->create_existing_game_list($list_id,$game_id,$status);
+                    $gl->rate($list_id,$entry_id,$rating);
+                }
+            }    
         }
     }
 ?>
@@ -87,6 +104,25 @@
         height: 50px;
         background: linear-gradient(to right, #000000, #52525200);  
         color: #ffffff;
+    }
+
+    #homepage {
+        float: right;
+        font-size: 15px;
+        margin-top: 12px;
+        margin-right: 10px;
+    }
+
+    #homepage a {
+            text-decoration: none;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #7da0ca7d;
+    }
+
+    #homepage a:hover {
+        background-color: #7da0cab2;  
     }
 
     #second_bar{
@@ -256,6 +292,7 @@
         <div style="width: 900px; margin: auto;font-size: 30px;">
             <div style="float: left;">GameList</div> 
             <?php echo "<div style='float: right'>Logged in as: $name</div>"; ?>
+            <div id="homepage"><a href="homepage.php">Go to homepage</a></div>
         </div>
     </div>
     <div id="second_bar" style="width: 900px; margin: auto;">
@@ -302,8 +339,32 @@
     </div>
     <br>
     <div style="width: 900px; color: #ffffff; font-size: 25px; margin: auto; margin-top: 5px;">
+    <span style="text-decoration: underline; padding-bottom: 5px;">Rate the game</span><br>
         <form method="post">
-            <input type="submit" value="Add to list" name="add_to_list" id="add" style="">
+            <div class="rate">
+                    <input type="radio" id="star10" name="rate" value="10" />
+                    <label for="star10" title="text">10 stars</label>
+                    <input type="radio" id="star9" name="rate" value="9" />
+                    <label for="star9" title="text">9 stars</label>
+                    <input type="radio" id="star8" name="rate" value="8" />
+                    <label for="star8" title="text">8 stars</label>
+                    <input type="radio" id="star7" name="rate" value="7" />
+                    <label for="star7" title="text">7 stars</label>
+                    <input type="radio" id="star6" name="rate" value="6" />
+                    <label for="star6" title="text">6 stars</label>
+                    <input type="radio" id="star5" name="rate" value="5" />
+                    <label for="star5" title="text">5 stars</label>
+                    <input type="radio" id="star4" name="rate" value="4" />
+                    <label for="star4" title="text">4 stars</label>
+                    <input type="radio" id="star3" name="rate" value="3" />
+                    <label for="star3" title="text">3 stars</label>
+                    <input type="radio" id="star2" name="rate" value="2" />
+                    <label for="star2" title="text">2 stars</label>
+                    <input type="radio" id="star1" name="rate" value="1" />
+                    <label for="star1" title="text">1 star</label>
+            </div>
+            <br>
+            <input type="submit" value="Add to list" name="add_to_list" id="add">
         </form>
     </div>
 </body>
