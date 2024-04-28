@@ -241,27 +241,30 @@
                             $serial_number=1;
                             $u=new User();
                             $result=$u->retrieve_limited_following($_SESSION['gamelist_userid']);
-                            foreach ($result as $key=>$value)
+                            if ($result)
                             {
-                                echo '<div class="game-bar">';
-                                echo '<div class="serial-number">';
-                                echo $serial_number;
-                                echo '</div>';
-                                echo '<div class="game-info">';
-                                echo '<div class="game-name">Name: ';
-                                echo $value['firstname']." ".$value['lastname'];
-                                echo '<br>';
-                                echo 'User ID: ';
-                                echo $value['user_id'];
-                                echo '</div>';    
-                                echo '<form method="get" action="friend_profile.php">';
-                                echo '<input type="submit" value="View Profile" style="background-color: #7da0ca7d; color: #fff; padding: 5px 10px; border-radius: 5px; border: none;" name=';
-                                echo $value['user_id'];
-                                echo '>';
-                                echo '</form>';
-                                echo '</div>';
-                                echo '</div>';
-                                $serial_number++;
+                                foreach ($result as $key=>$value)
+                                {
+                                    echo '<div class="game-bar">';
+                                    echo '<div class="serial-number">';
+                                    echo $serial_number;
+                                    echo '</div>';
+                                    echo '<div class="game-info">';
+                                    echo '<div class="game-name">Name: ';
+                                    echo $value['firstname']." ".$value['lastname'];
+                                    echo '<br>';
+                                    echo 'User ID: ';
+                                    echo $value['user_id'];
+                                    echo '</div>';    
+                                    echo '<form method="get" action="friend_profile.php">';
+                                    echo '<input type="submit" value="View Profile" style="background-color: #7da0ca7d; color: #fff; padding: 5px 10px; border-radius: 5px; border: none;" name=';
+                                    echo $value['user_id'];
+                                    echo '>';
+                                    echo '</form>';
+                                    echo '</div>';
+                                    echo '</div>';
+                                    $serial_number++;
+                                }
                             }
                 ?>
 
