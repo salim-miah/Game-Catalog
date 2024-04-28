@@ -36,55 +36,80 @@
     }
     if($_SERVER['REQUEST_METHOD']=="POST")
     {
-        $gl= new GameList();
-        $user_id=$_SESSION['gamelist_userid'];
-        $game_id=$_SESSION['game_id'];
-        $rating=false;
-        $status='currentlyplaying';
-        $list_id=$gl->check_userlist($user_id);
-        $entry_id="";
-        if (!isset($_POST['rate']))
-        {
-            echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
-            echo "Please rate the game";
-            echo "</div>";    
-        }
-        else
-        {
-            $rating=$_POST['rate'];
-            if ($list_id==NULL)
+            $gl= new GameList();
+            $user_id=$_SESSION['gamelist_userid'];
+            $game_id=$_SESSION['game_id'];
+            $rating=false;
+            $status='currentlyplaying';
+            $list_id=$gl->check_userlist($user_id);
+            $entry_id="";
+            if (isset($_POST['rate']))
             {
-                $id=$gl->create_new_game_list($user_id,$game_id,$status);
-                $list_id=$id[0];
-                $entry_id=$id[1];
-                $gl->rate($list_id,$entry_id,$rating);
+                $rating=$_POST['rate'];
+                if ($list_id==NULL)
+                {
+                    $id=$gl->create_new_game_list($user_id,$game_id,$status);
+                    $list_id=$id[0];
+                    $entry_id=$id[1];
+                    $gl->rate($list_id,$entry_id,$rating);
+                }
+                else
+                {
+                    $result=$gl->check_addinggames($game_id,$list_id);
+                    if ($result!=false)
+                    {
+                        $entry_id=$result;
+                        $bool=$gl->check_flag($status,$list_id,$entry_id);
+                        if ($bool==true)
+                        {
+                            echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
+                            echo "The following errors occured<br><br>";
+                            echo "The Game already exists in the list";
+                            echo "</div>";
+                        }
+                        else
+                        {
+                            $gl->rate($list_id,$entry_id,$rating);
+                        }
+                    }
+                    else //if the game is not added before
+                    {
+                        $entry_id=$gl->create_existing_game_list($list_id,$game_id,$status);
+                        $gl->rate($list_id,$entry_id,$rating);
+                    }
+                }    
             }
             else
             {
-                $result=$gl->check_addinggames($game_id,$list_id);
-                if ($result!=false)
+                if ($list_id==NULL)
                 {
-                    $entry_id=$result;
-                    $bool=$gl->check_flag($status,$list_id,$entry_id);
-                    if ($bool==true)
+                    $id=$gl->create_new_game_list($user_id,$game_id,$status);
+                    $list_id=$id[0];
+                    $entry_id=$id[1];
+                }
+                else
+                {
+                    $result=$gl->check_addinggames($game_id,$list_id);
+                    if ($result!=false)
                     {
-                        echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
-                        echo "The following errors occured<br><br>";
-                        echo "The Game already exists in the list";
-                        echo "</div>";
+                        $entry_id=$result;
+                        $bool=$gl->check_flag($status,$list_id,$entry_id);
+                        if ($bool==true)
+                        {
+                            echo "<div style='background-color: grey;font-size: 12px;color: white; text-align:center'>"; 
+                            echo "The following errors occured<br><br>";
+                            echo "The Game already exists in the list";
+                            echo "</div>";
+                        }
                     }
-                    else
+                    else //if the game is not added before
                     {
-                        $gl->rate($list_id,$entry_id,$rating);
+                        $entry_id=$gl->create_existing_game_list($list_id,$game_id,$status);
                     }
                 }
-                else //if the game is not added before
-                {
-                    $entry_id=$gl->create_existing_game_list($list_id,$game_id,$status);
-                    $gl->rate($list_id,$entry_id,$rating);
-                }
-            }    
-        }
+            }
+            
+
     }
 ?>
 
