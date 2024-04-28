@@ -40,7 +40,7 @@
         $user_id=$_SESSION['gamelist_userid'];
         $game_id=$_SESSION['game_id'];
         $rating=false;
-        $status='completed';
+        $status='currentlyplaying';
         $list_id=$gl->check_userlist($user_id);
         $entry_id="";
         if (!isset($_POST['rate']))
