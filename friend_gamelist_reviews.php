@@ -84,6 +84,21 @@
     #homepage a:hover {
         background-color: #7da0cab2;  
     }
+    #logout a{
+        float: right; 
+        margin: 12px; 
+        text-decoration: none; 
+        color: #fff; 
+        padding: 3px 10px; 
+        border-radius: 5px; 
+        background-color: #7da0ca7d;
+
+    }
+
+    #logout a:hover {
+        background-color: #7da0cab2; 
+
+    }
 
     #second_bar{
         height: 50px;
